@@ -5,10 +5,13 @@ public class PlayerController : Singleton<PlayerController>
 {
     public Camera cam;
     private NavMeshAgent agent;
+    private PlayerStateMachineController stateMachine;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        // has start & update monobehaviour logic
+        stateMachine = GetComponent<PlayerStateMachineController>();
     }
 
     // Update is called once per frame
