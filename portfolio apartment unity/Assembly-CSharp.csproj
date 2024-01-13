@@ -59,19 +59,14 @@
     <UnityVersion>2022.3.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="/Users/atogmac/.vscode/extensions/visualstudiotoolsforunity.vstuc-0.9.3/Analyzers/Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="/Users/atogmac/.vscode/extensions/visualstudiotoolsforunity.vstuc-0.9.4/Analyzers/Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.16f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll" />
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.16f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/States/Player/PlayerIdleState.cs" />
-    <Compile Include="Assets/Scripts/States/Player/PlayerStateMachine.cs" />
     <Compile Include="Assets/Scripts/FollowerController.cs" />
-    <Compile Include="Assets/Scripts/States/Player/PlayerRunState.cs" />
     <Compile Include="Assets/Scripts/MovementManager.cs" />
-    <Compile Include="Assets/Scripts/States/State.cs" />
     <Compile Include="Assets/Scripts/Singleton.cs" />
-    <Compile Include="Assets/Scripts/States/Player/PlayerWalkState.cs" />
     <Compile Include="Assets/Scripts/GameManager.cs" />
     <Compile Include="Assets/Scripts/PlayerController.cs" />
   </ItemGroup>

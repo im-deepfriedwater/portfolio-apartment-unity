@@ -1299,6 +1299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Follower
       objectReference: {fileID: 0}
+    - target: {fileID: 3325144494255766054, guid: e147c7907c9ff429b8d55be1c885983e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9e67584ac25aa4eaa8b0c6d03b7bcd8e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1312,6 +1316,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 768846978768469040, guid: 4b570e3c2690643c39bfff734ab4ec3f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 768846978768469040, guid: 4b570e3c2690643c39bfff734ab4ec3f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150028090851973249, guid: 4b570e3c2690643c39bfff734ab4ec3f, type: 3}
+      propertyPath: m_Acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150028090851973249, guid: 4b570e3c2690643c39bfff734ab4ec3f, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 4189851019710332720, guid: 4b570e3c2690643c39bfff734ab4ec3f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1356,6 +1376,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7044945636770795495, guid: 4b570e3c2690643c39bfff734ab4ec3f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 067d8642e88df4146939f8c5dcfe5e80, type: 2}
     - target: {fileID: 8999994176051595863, guid: 4b570e3c2690643c39bfff734ab4ec3f, type: 3}
       propertyPath: cam
       value: 

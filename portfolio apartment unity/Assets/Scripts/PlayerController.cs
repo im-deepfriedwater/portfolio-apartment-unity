@@ -4,28 +4,50 @@ using UnityEngine.AI;
 public class PlayerController : Singleton<PlayerController>
 {
     public Camera cam;
+    public float navAgentRotationTimeInSeconds = 1;
+
+    private Animator animator;
     private NavMeshAgent agent;
-    private PlayerStateMachineController stateMachine;
+    private bool canMove = true;
+
+    private readonly float runDistanceThreshold = 3;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        // has start & update monobehaviour logic
-        stateMachine = GetComponent<PlayerStateMachineController>();
+        animator = GetComponentsInChildren<Animator>()[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (canMove)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            if (Input.GetMouseButtonDown(0))
             {
-                agent.SetDestination(hit.point);
+                HandleAgentNavigation();
             }
+
+            HandleCurrentMovement();
         }
+    }
+
+    void HandleAgentNavigation()
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            agent.SetDestination(hit.point);
+        }
+    }
+
+    void HandleCurrentMovement()
+    {
+        float distance = Vector3.Distance(agent.destination, transform.position);
+        bool isMoving = distance > 0;
+
+        animator.SetBool("IsRunningDistance", distance > runDistanceThreshold);
+        animator.SetBool("IsMoving", isMoving);
     }
 }

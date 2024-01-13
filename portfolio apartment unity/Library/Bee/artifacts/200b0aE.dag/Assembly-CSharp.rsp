@@ -359,11 +359,6 @@
 "Assets/Scripts/MovementManager.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/Singleton.cs"
-"Assets/Scripts/States/Player/PlayerIdleState.cs"
-"Assets/Scripts/States/Player/PlayerRunState.cs"
-"Assets/Scripts/States/Player/PlayerStateMachine.cs"
-"Assets/Scripts/States/Player/PlayerWalkState.cs"
-"Assets/Scripts/States/State.cs"
 -langversion:9.0
 
 /deterministic
