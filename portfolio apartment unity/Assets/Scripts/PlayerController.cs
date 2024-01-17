@@ -47,13 +47,15 @@ public class PlayerController : Singleton<PlayerController>
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             agent.SetDestination(hit.point);
+            Debug.Log("Click");
         }
     }
 
     void HandleCurrentMovement()
     {
         float distance = Vector3.Distance(agent.destination, transform.position);
-        bool isMoving = distance > 0;
+        bool isMoving = agent.velocity != Vector3.zero;
+;
 
         if (distance > runDistanceThreshold)
         {

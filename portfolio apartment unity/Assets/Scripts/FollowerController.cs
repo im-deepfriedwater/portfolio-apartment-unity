@@ -43,10 +43,21 @@ public class FollowerController : Singleton<FollowerController>
     void HandleCurrentMovement()
     {
         var distance = Vector3.Distance(player.transform.position.normalized, transform.position.normalized);
+        bool isMoving = agent.velocity != Vector3.zero;
+
 
         if (distance > runDistanceThreshold)
         {
-            // increase speed to run and update state in animation controller
+            agent.speed = runSpeed;
+            agent.acceleration = runAcceleration;
         }
+        else
+        {
+            agent.speed = walkSpeed;
+            agent.acceleration = walkAcceleration;
+        }
+
+        animator.SetBool("IsRunningDistance", distance > runDistanceThreshold);
+        animator.SetBool("IsMoving", isMoving);
     }
 }

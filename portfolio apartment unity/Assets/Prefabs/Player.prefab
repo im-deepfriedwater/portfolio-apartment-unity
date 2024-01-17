@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  walkSpeed: 8
+  walkAcceleration: 15
+  runSpeed: 6
+  runAcceleration: 10
 --- !u!195 &1150028090851973249
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -157,6 +161,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Body
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 4e1a7171a78d04a9a9b0dc6904220da2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 067d8642e88df4146939f8c5dcfe5e80, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
