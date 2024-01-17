@@ -32,15 +32,12 @@ public class FollowerController : Singleton<FollowerController>
         {
             HandleAgentNavigation();
             HandleCurrentMovement();
-
         }
-
-        agent.SetDestination(player.transform.position);
     }
 
     void HandleAgentNavigation()
     {
-
+        agent.SetDestination(player.transform.position);
     }
 
     void HandleCurrentMovement()
