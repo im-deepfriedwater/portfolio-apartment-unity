@@ -43,7 +43,7 @@ public class PlayerController : Singleton<PlayerController>
     void HandleAgentNavigation()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
+        Debug.Log(ray);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             agent.SetDestination(hit.point);
