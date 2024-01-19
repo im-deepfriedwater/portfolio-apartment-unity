@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "5a1fa96bd2d75e8402a66b4e8480105472a9aca7"
     },
+    "com.inkle.ink-unity-integration": {
+      "version": "https://github.com/inkle/ink-unity-integration.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f7a5ed16b93fe2d220d8833a82e0324276cd2d0e"
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
       "depth": 0,

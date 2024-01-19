@@ -9,12 +9,12 @@ public class FollowerController : Singleton<FollowerController>
 
     private PlayerController player;
 
-    public float runDistanceThreshold = 0.5f;
-    public float walkSpeed = 8;
-    public float walkAcceleration = 15;
+    public float RunDistanceThreshold = 0.5f;
+    public float WalkSpeed = 8;
+    public float WalkAcceleration = 15;
 
-    public float runSpeed = 6;
-    public float runAcceleration = 10;
+    public float RunSpeed = 6;
+    public float RunAcceleration = 10;
 
 
     // Start is called before the first frame update
@@ -46,18 +46,18 @@ public class FollowerController : Singleton<FollowerController>
         bool isMoving = agent.velocity != Vector3.zero;
 
 
-        if (distance > runDistanceThreshold)
+        if (distance > RunDistanceThreshold)
         {
-            agent.speed = runSpeed;
-            agent.acceleration = runAcceleration;
+            agent.speed = RunSpeed;
+            agent.acceleration = RunAcceleration;
         }
         else
         {
-            agent.speed = walkSpeed;
-            agent.acceleration = walkAcceleration;
+            agent.speed = WalkSpeed;
+            agent.acceleration = WalkAcceleration;
         }
 
-        animator.SetBool("IsRunningDistance", distance > runDistanceThreshold);
+        animator.SetBool("IsRunningDistance", distance > RunDistanceThreshold);
         animator.SetBool("IsMoving", isMoving);
     }
 }

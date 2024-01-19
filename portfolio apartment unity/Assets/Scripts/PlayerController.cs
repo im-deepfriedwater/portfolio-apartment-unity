@@ -1,15 +1,19 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class NavMeshClickEvent: UnityEvent<Ray> {}
 
 public class PlayerController : Singleton<PlayerController>
 {
-    public Camera cam;
+    public float WalkSpeed = 8;
+    public float WalkAcceleration = 15;
 
-    public float walkSpeed = 8;
-    public float walkAcceleration = 15;
+    public float RunSpeed = 6;
+    public float RunAcceleration = 10;
 
-    public float runSpeed = 6;
-    public float runAcceleration = 10;
+    public NavMeshClickEvent NavMeshClickEvent;
 
     private Animator animator;
     private NavMeshAgent agent;
@@ -20,10 +24,12 @@ public class PlayerController : Singleton<PlayerController>
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = walkSpeed;
-        agent.acceleration = walkAcceleration;
+        agent.speed = WalkSpeed;
+        agent.acceleration = WalkAcceleration;
 
         animator = GetComponentsInChildren<Animator>()[0];
+
+        NavMeshClickEvent.AddListener(OnNavMeshClick);
     }
 
     // Update is called once per frame
@@ -31,42 +37,34 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (canMove)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                HandleAgentNavigation();
-            }
-
-            HandleCurrentMovement();
+          HandleCurrentMovement();
         }
     }
 
-    void HandleAgentNavigation()
+    void OnNavMeshClick(Ray ray)
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        Debug.Log(ray);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            agent.SetDestination(hit.point);
-            Debug.Log("Click");
-        }
+      if (Physics.Raycast(ray, out RaycastHit hit))
+      {
+        agent.SetDestination(hit.point);
+      }
     }
 
     void HandleCurrentMovement()
     {
         float distance = Vector3.Distance(agent.destination, transform.position);
         bool isMoving = agent.velocity != Vector3.zero;
-;
 
         if (distance > runDistanceThreshold)
         {
-            agent.speed = runSpeed;
-            agent.acceleration = runAcceleration;
+            agent.speed = RunSpeed;
+            agent.acceleration = RunAcceleration;
         }
         else
         {
-            agent.speed = walkSpeed;
-            agent.acceleration = walkAcceleration;
+            agent.speed = WalkSpeed;
+            agent.acceleration = WalkAcceleration;
         }
+
         animator.SetBool("IsRunningDistance", distance > runDistanceThreshold);
         animator.SetBool("IsMoving", isMoving);
     }
