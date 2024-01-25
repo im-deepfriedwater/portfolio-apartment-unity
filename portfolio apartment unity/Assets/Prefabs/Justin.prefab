@@ -1942,7 +1942,7 @@ GameObject:
   - component: {fileID: 1473548061865191753}
   - component: {fileID: 3008366334859199376}
   m_Layer: 17
-  m_Name: Follower
+  m_Name: Justin
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

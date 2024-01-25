@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8999994176051595863}
   - component: {fileID: 1150028090851973249}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Recruiter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,11 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0214fb5e95343efb353e635fad91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  walkSpeed: 8
-  walkAcceleration: 15
-  runSpeed: 6
-  runAcceleration: 10
+  WalkSpeed: 8
+  WalkAcceleration: 15
+  RunSpeed: 6
+  RunAcceleration: 10
+  NavMeshClickEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!195 &1150028090851973249
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -156,7 +158,7 @@ PrefabInstance:
     - target: {fileID: 707891331658529256, guid: 4e1a7171a78d04a9a9b0dc6904220da2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8e7a9c1dc16ee41888cbaf37c656b9dc, type: 2}
+      objectReference: {fileID: 2100000, guid: beed769b81949487ea4ef5e40052c304, type: 2}
     - target: {fileID: 919132149155446097, guid: 4e1a7171a78d04a9a9b0dc6904220da2, type: 3}
       propertyPath: m_Name
       value: Body
@@ -167,11 +169,101 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 067d8642e88df4146939f8c5dcfe5e80, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7371613002070893710, guid: 4e1a7171a78d04a9a9b0dc6904220da2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4479402826606654580}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e1a7171a78d04a9a9b0dc6904220da2, type: 3}
 --- !u!4 &3973441988041414045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4e1a7171a78d04a9a9b0dc6904220da2, type: 3}
   m_PrefabInstance: {fileID: 3507803913106092662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6260852214500153080 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7371613002070893710, guid: 4e1a7171a78d04a9a9b0dc6904220da2, type: 3}
+  m_PrefabInstance: {fileID: 3507803913106092662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4152512775072535455
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6260852214500153080}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4321883
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4321883
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4321883
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01018
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+      propertyPath: m_Name
+      value: hairBobcut
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+--- !u!4 &4479402826606654580 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
+  m_PrefabInstance: {fileID: 4152512775072535455}
   m_PrefabAsset: {fileID: 0}
