@@ -2,6 +2,7 @@
   "dependencies": {
     "com.cakeslice.outline-effect": "https://github.com/cakeslice/Outline-Effect.git",
     "com.inkle.ink-unity-integration": "https://github.com/inkle/ink-unity-integration.git#upm",
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.development": "1.0.1",
