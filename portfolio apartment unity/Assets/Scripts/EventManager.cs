@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class EventManager : MonoBehaviour
+[System.Serializable]
+public class NavMeshClickEvent : UnityEvent<Ray> { }
+
+public class EventManager : Singleton<EventManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public NavMeshClickEvent NavMeshClickEvent;
+    public UnityEvent showDialogue;
+    public UnityEvent hideDialogue;
+    public UnityEvent playIntro;
 }

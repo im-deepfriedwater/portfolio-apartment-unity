@@ -1,9 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
-
-[System.Serializable]
-public class NavMeshClickEvent: UnityEvent<Ray> {}
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -12,8 +8,6 @@ public class PlayerController : Singleton<PlayerController>
 
     public float RunSpeed = 6;
     public float RunAcceleration = 10;
-
-    public NavMeshClickEvent NavMeshClickEvent;
 
     private Animator animator;
     private NavMeshAgent agent;
@@ -29,7 +23,7 @@ public class PlayerController : Singleton<PlayerController>
 
         animator = GetComponentsInChildren<Animator>()[0];
 
-        NavMeshClickEvent.AddListener(OnNavMeshClick);
+        EventManager.Instance.NavMeshClickEvent.AddListener(OnNavMeshClick);
     }
 
     // Update is called once per frame

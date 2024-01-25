@@ -4,15 +4,15 @@ public class GroundNavMesh : MonoBehaviour
 {
   public Camera Cam;
 
-  private PlayerController player;
+  private EventManager eventManager;
 
   void Start()
   {
-    player = PlayerController.Instance;
+    eventManager = EventManager.Instance;
   }
 
   void OnMouseDown()
   {
-    player.NavMeshClickEvent.Invoke(Cam.ScreenPointToRay(Input.mousePosition));
+    eventManager.NavMeshClickEvent.Invoke(Cam.ScreenPointToRay(Input.mousePosition));
   }
 }
