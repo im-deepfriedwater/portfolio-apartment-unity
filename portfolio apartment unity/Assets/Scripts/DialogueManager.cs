@@ -5,29 +5,35 @@ using UnityEngine.Events;
 public class DialogueManager : Singleton<DialogueManager>
 {
     [SerializeField]
-    private  CanvasElementsController CanvasController;
+    private CanvasElementsController canvasController;
 
     [SerializeField]
-	private TextAsset dialogueInk = null;
+    private TextAsset dialogueInk = null;
 
     public UnityEvent NextDialogue;
 
-	public Story story;
+    public Story CurrentStory;
 
-  // Start is called before the first frame update
-  void Start()
-  {
-      NextDialogue.AddListener(OnNextDialogue);
-  }
+    // Start is called before the first frame update
+    void Start()
+    {
+        NextDialogue.AddListener(OnNextDialogue);
+    }
 
-  // Update is called once per frame
-  void Update()
-  {
-      
-  }
+    void InitDialogue()
+    {
+        canvasController.Show();
+    }
 
-  void OnNextDialogue()
-  {
+    // Update is called once per frame
+    void Update()
+    {
 
-  }
+    }
+
+    void OnNextDialogue()
+    {
+        CurrentStory.Continue();
+        canvasController.NextDialogue(CurrentStory);
+    }
 }
