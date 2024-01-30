@@ -1,16 +1,21 @@
-using System.Diagnostics;
+using System.Collections;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
 
 public class CanvasElementsController : MonoBehaviour
-{
+{   
     private Animator animator;
     private DialogueManager dialogueManager;
     private bool isReadyForInput = false;
 
+    private IEnumerator textDisplayCoroutine;
+
     [SerializeField]
     private TextMeshProUGUI body;
+
+    [SerializeField]
+    private TextMeshProUGUI overflowChecker;
 
     [SerializeField]
     private TextMeshProUGUI namePlate;
@@ -34,15 +39,24 @@ public class CanvasElementsController : MonoBehaviour
         bool inputEvent = false;
 
         if (!isReadyForInput) return;
-    
+
         if (inputEvent)
         {
             dialogueManager.NextDialogue.Invoke();
         }
     }
 
-    public void NextDialogue(Story story)
+    void ProcessNameTag(string newValue, string side)
     {
+        namePlate.text = newValue;
+        namePlate.alignment = side == "left"
+            ? TextAlignmentOptions.Left
+            : TextAlignmentOptions.Right;
+    }
+
+    public void NextDialogue(Story story)
+    {   
+        bool isRant = false;
         for (int i = 0; i < story.currentTags.Count; i++)
         {
             string tag = story.currentTags[i].ToLower();
@@ -50,9 +64,15 @@ public class CanvasElementsController : MonoBehaviour
             {
                 if (tag == "rcr")
                 {
-
-                } else if (tag == "jt")
+                    ProcessNameTag("Recruiter (she/her)", "right");
+                }
+                else if (tag == "jt")
                 {
+                    ProcessNameTag("Justin (he/him)", "left");
+                }
+                else if (tag == "narrator")
+                {
+                    ProcessNameTag("Narrator", "left");
 
                 }
                 continue;
@@ -63,7 +83,10 @@ public class CanvasElementsController : MonoBehaviour
                 ProcessAnimationTag(tag);
             }
         }
+
+        StartDisplayText(isRant, story.currentText);
     }
+
 
     void ProcessAnimationTag(string tag)
     {
@@ -74,14 +97,17 @@ public class CanvasElementsController : MonoBehaviour
         switch (animationTarget)
         {
             case "left":
-                
-            break;
+                left.PlayAnimation(animationName);
+                break;
 
             case "right":
-            break;
+                right.PlayAnimation(animationName);
+                break;
 
             case "both":
-            break;
+                left.PlayAnimation(animationName);
+                right.PlayAnimation(animationName);
+                break;
 
             default:
                 throw new System.Exception($"CanvasElementController: Bad param for animation target passed {animationTarget}");
@@ -100,11 +126,23 @@ public class CanvasElementsController : MonoBehaviour
 
     void OnShowAnimFinished()
     {
-        
+
     }
 
-    void DisplayText()
+    void StartDisplayText(bool isRant, string msg)
     {
-
+        textDisplayCoroutine = DisplayText(isRant, msg);
+        StartCoroutine(textDisplayCoroutine);
     }
+
+    IEnumerator DisplayText(bool isRant, string msg)
+    {   
+        foreach (char c in msg)
+        {
+            body.text += c;
+            yield return null;
+        }
+    }
+
+
 }

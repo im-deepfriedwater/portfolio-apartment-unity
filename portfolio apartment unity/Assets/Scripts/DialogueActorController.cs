@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueActorController : MonoBehaviour
@@ -9,6 +8,6 @@ public class DialogueActorController : MonoBehaviour
     public void PlayAnimation(string animationTagName)
     {
       var animName = animationTagName[0].ToString().ToUpper() + animationTagName.Substring(1);
-      animator.Play(animName);
+      animator.Play($"Base Layer.{animName}");
     }
 }
