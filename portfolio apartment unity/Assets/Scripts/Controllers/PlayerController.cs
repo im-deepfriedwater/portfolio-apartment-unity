@@ -12,7 +12,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private Animator animator;
     private NavMeshAgent agent;
-    private bool canMove = true;
+    private bool canMove = false;
 
     private readonly float runDistanceThreshold = 3;
 
@@ -40,6 +40,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void OnNavMeshClick(Ray ray)
     {
+      if (!canMove) return;
       if (Physics.Raycast(ray, out RaycastHit hit))
       {
         agent.SetDestination(hit.point);

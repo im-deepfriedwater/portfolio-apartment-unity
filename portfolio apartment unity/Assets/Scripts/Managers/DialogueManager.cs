@@ -3,37 +3,41 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class StartStoryEvent : UnityEvent<Story> { }
+public class StartDialogueEvent : UnityEvent<Story> { }
 
 public class DialogueManager : Singleton<DialogueManager>
 {
+    [SerializeField]
+    private TextAsset introStory = null;
+    [SerializeField]
+    private TextAsset generalDialogueStory = null;
     [SerializeField]
     private CanvasElementsController canvasController;
 
     public UnityEvent NextDialogue;
     public UnityEvent InputAttempt;
-    public StartStoryEvent StartDialogue;
+    
+    public UnityEvent StartDialogue;
     public UnityEvent EndOfDialogueReached;
+
+    public UnityEvent InitGeneralDialogue;
 
     private Story currentStory;
 
-    // Start is called before the first frame update
-    void Start()
-    {   
-        StartDialogue.AddListener(OnStartDialogue);
+    public override void AwakeInit()
+    {
         NextDialogue.AddListener(OnNextDialogue);
+        InitGeneralDialogue.AddListener(() => InitDialogue(new Story(generalDialogueStory.text)));
     }
 
-
-
-    void OnStartDialogue(StartStoryEvent story)
+    void InitDialogue(Story story)
     {
-        story = currentStory;
+        currentStory = story;
         canvasController.InitDialogue(currentStory);
     }
 
     void OnNextDialogue()
-    {   
+    {
         if (!currentStory.canContinue)
         {
             canvasController.EndDialogue();
@@ -43,7 +47,6 @@ public class DialogueManager : Singleton<DialogueManager>
         currentStory.Continue();
         canvasController.NextDialogue();
     }
-
 }
 
 // Dialogue Manager business logic

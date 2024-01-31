@@ -1,19 +1,17 @@
 using Ink.Runtime;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{   
-    [SerializeField]
-    private Story introStory;
+public class GameManager : Singleton<GameManager>
+{
     // Start is called before the first frame update
     void Start()
     {
-        DialogueManager.Instance.StartDialogue.Invoke(introStory);
+        DialogueManager.Instance.StartDialogue.Invoke();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
