@@ -43,11 +43,9 @@ public class CanvasElementsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool inputEvent = false;
-
         if (!isReadyForInput) return;
 
-        if (inputEvent)
+        if (Input.GetMouseButtonDown(0))
         {
             dialogueManager.NextDialogue.Invoke();
         }
@@ -152,10 +150,15 @@ public class CanvasElementsController : MonoBehaviour
         animator.Play("Show");
     }
 
-    // Called when ShowAnim finishes
+    // Called by the Show anim as an AnimationEvent when the anim finishes
     void OnShowAnimFinished()
     {
         NextDialogue();
+    }
+
+    void OnHideAnimFinished()
+    {
+        dialogueManager.EndOfDialogueReached.Invoke();
     }
 
     void StartDisplayText(bool hasRantTag, string msg)

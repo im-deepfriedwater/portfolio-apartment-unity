@@ -9,6 +9,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public UnityEvent NextDialogue;
     public UnityEvent InputAttempt;
+    public UnityEvent StartDialogue;
     public UnityEvent EndOfDialogueReached;
 
     public Story CurrentStory;
@@ -21,6 +22,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     void InitDialogue()
     {
+        StartDialogue.Invoke();
         canvasController.InitDialogue(CurrentStory);
     }
 
@@ -35,9 +37,10 @@ public class DialogueManager : Singleton<DialogueManager>
         CurrentStory.Continue();
         canvasController.NextDialogue();
     }
+
 }
 
 // Dialogue Manager business logic
-// Canvas Controller controlling the frontend and input? 
+// Canvas Controller controlling the frontend and input
 // Canvas Controller will drive when we're ready to move through the Dialogue
 // Canvas Controller should tell the Dialogue Manager when we're ready to try to show the next dialogue
