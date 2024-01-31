@@ -8,6 +8,10 @@ public class CanvasElementsController : MonoBehaviour
     private Animator animator;
     private DialogueManager dialogueManager;
     private bool isReadyForInput = false;
+    private bool hasTriedToSkip = false;
+    private bool isDialogueDisplayFinished = false;
+
+    private Story currentStory;
 
     private IEnumerator textDisplayCoroutine;
 
@@ -25,6 +29,9 @@ public class CanvasElementsController : MonoBehaviour
 
     [SerializeField]
     private DialogueActorController right;
+
+    [SerializeField]
+    private GameObject goNextIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -54,12 +61,25 @@ public class CanvasElementsController : MonoBehaviour
             : TextAlignmentOptions.Right;
     }
 
-    public void NextDialogue(Story story)
+    // Call this first when starting
+    // dialogue. Then, call NextDialogue
+    // when player prompts the dialogue 
+    // forward.
+    public void InitDialogue(Story story)
+    {
+        currentStory = story;
+        Show();
+    }
+
+    public void NextDialogue()
     {   
-        bool isRant = false;
-        for (int i = 0; i < story.currentTags.Count; i++)
+        bool hasRantTag = false;
+        isDialogueDisplayFinished = false;
+        goNextIndicator.SetActive(false);
+
+        for (int i = 0; i < currentStory.currentTags.Count; i++)
         {
-            string tag = story.currentTags[i].ToLower();
+            string tag = currentStory.currentTags[i].ToLower();
             if (i == 0)
             {
                 if (tag == "rcr")
@@ -81,10 +101,18 @@ public class CanvasElementsController : MonoBehaviour
             if (tag.Contains("anim"))
             {
                 ProcessAnimationTag(tag);
+            } else if (tag.Contains("rant"))
+            {
+                hasRantTag = true;
             }
         }
 
-        StartDisplayText(isRant, story.currentText);
+        StartDisplayText(hasRantTag, currentStory.currentText);
+    }
+
+    public void EndDialogue()
+    {
+        Hide();
     }
 
 
@@ -114,24 +142,26 @@ public class CanvasElementsController : MonoBehaviour
         }
     }
 
-    public void Hide()
+    private void Hide()
     {
         animator.Play("Hide");
     }
 
-    public void Show()
+    private void Show()
     {
         animator.Play("Show");
     }
 
+    // Called when ShowAnim finishes
     void OnShowAnimFinished()
     {
-
+        NextDialogue();
     }
 
-    void StartDisplayText(bool isRant, string msg)
-    {
-        textDisplayCoroutine = DisplayText(isRant, msg);
+    void StartDisplayText(bool hasRantTag, string msg)
+    {   
+        hasTriedToSkip = false;
+        textDisplayCoroutine = DisplayText(hasRantTag, msg);
         StartCoroutine(textDisplayCoroutine);
     }
 
@@ -139,10 +169,42 @@ public class CanvasElementsController : MonoBehaviour
     {   
         foreach (char c in msg)
         {
+            if (!isRant && hasTriedToSkip)
+            {
+                FinishText(msg);
+                break;
+            }
             body.text += c;
             yield return null;
         }
+
+        HandleDialogueDisplayFinish();
     }
 
+    void FinishText(string msg)
+    {
+        body.text = msg;
+        HandleDialogueDisplayFinish();
+    }
 
+    void HandleDialogueDisplayFinish()
+    {
+        isDialogueDisplayFinished = true;
+        goNextIndicator.SetActive(true);
+    }
+
+    void OnHandleInputInterrupt()
+    {
+        if (!isReadyForInput) return;
+        
+        if (!isDialogueDisplayFinished)
+        {
+            hasTriedToSkip = true;
+        }
+
+        if (isDialogueDisplayFinished)
+        {
+            dialogueManager.NextDialogue.Invoke();
+        }
+    }
 }
