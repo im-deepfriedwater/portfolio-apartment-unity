@@ -2,6 +2,9 @@ using Ink.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class StartStoryEvent : UnityEvent<Story> { }
+
 public class DialogueManager : Singleton<DialogueManager>
 {
     [SerializeField]
@@ -9,32 +12,35 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public UnityEvent NextDialogue;
     public UnityEvent InputAttempt;
-    public UnityEvent StartDialogue;
+    public StartStoryEvent StartDialogue;
     public UnityEvent EndOfDialogueReached;
 
-    public Story CurrentStory;
+    private Story currentStory;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        StartDialogue.AddListener(OnStartDialogue);
         NextDialogue.AddListener(OnNextDialogue);
     }
 
-    void InitDialogue()
+
+
+    void OnStartDialogue(StartStoryEvent story)
     {
-        StartDialogue.Invoke();
-        canvasController.InitDialogue(CurrentStory);
+        story = currentStory;
+        canvasController.InitDialogue(currentStory);
     }
 
     void OnNextDialogue()
     {   
-        if (!CurrentStory.canContinue)
+        if (!currentStory.canContinue)
         {
             canvasController.EndDialogue();
             return;
         }
 
-        CurrentStory.Continue();
+        currentStory.Continue();
         canvasController.NextDialogue();
     }
 

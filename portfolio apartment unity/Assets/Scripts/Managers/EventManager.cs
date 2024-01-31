@@ -7,7 +7,7 @@ public class NavMeshClickEvent : UnityEvent<Ray> { }
 public class EventManager : Singleton<EventManager>
 {
     public NavMeshClickEvent NavMeshClickEvent;
-    public UnityEvent showDialogue;
-    public UnityEvent hideDialogue;
-    public UnityEvent playIntro;
+    public UnityEvent ShowDialogue;
+    public UnityEvent HideDialogue;
+    public UnityEvent PlayIntro;
 }

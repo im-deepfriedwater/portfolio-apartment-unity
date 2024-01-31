@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +25,7 @@ public class PlayerController : Singleton<PlayerController>
         animator = GetComponentsInChildren<Animator>()[0];
 
         EventManager.Instance.NavMeshClickEvent.AddListener(OnNavMeshClick);
-        DialogueManager.Instance.StartDialogue.AddListener(() => canMove = false);
+        DialogueManager.Instance.StartDialogue.AddListener((Story _) => canMove = false);
         DialogueManager.Instance.EndOfDialogueReached.AddListener(() => canMove = true);
     }
 
