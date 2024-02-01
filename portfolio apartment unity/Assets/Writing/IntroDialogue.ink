@@ -1,4 +1,4 @@
-... # rcr # anim_both_shocked # exclaim_jt
+... # rcr # anim_both_shocked # exclaim_left
 ... !! # jt # anim_both_shocked
 ...... # rcr # anim_both_shocked
 Well, anyways. Pleased to meet you. I'm a recruiter fo- # rcr # anim_jt_shocked
