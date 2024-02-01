@@ -3,36 +3,38 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class StartDialogueEvent : UnityEvent<Story> { }
+public class StartDialogueEvent : UnityEvent<TextAsset> { }
 
 public class DialogueManager : Singleton<DialogueManager>
 {
-    [SerializeField]
-    private TextAsset introStory = null;
-    [SerializeField]
-    private TextAsset generalDialogueStory = null;
-    [SerializeField]
-    private CanvasElementsController canvasController;
-
+    [HideInInspector]
     public UnityEvent NextDialogue;
+
+    [HideInInspector]
     public UnityEvent InputAttempt;
-    
-    public UnityEvent StartDialogue;
+
+    [HideInInspector]
     public UnityEvent EndOfDialogueReached;
 
-    public UnityEvent InitGeneralDialogue;
+    [HideInInspector]
+    public StartDialogueEvent StartDialogue;
+
+
+    [SerializeField]
+    private CanvasElementsController canvasController;
 
     private Story currentStory;
 
     public override void AwakeInit()
     {
         NextDialogue.AddListener(OnNextDialogue);
-        InitGeneralDialogue.AddListener(() => InitDialogue(new Story(generalDialogueStory.text)));
+        StartDialogue.AddListener(OnStartDialogue);
+        EndOfDialogueReached.AddListener(OnEndOfDialogueReached);
     }
 
-    void InitDialogue(Story story)
+    void OnStartDialogue(TextAsset inkStoryJSON)
     {
-        currentStory = story;
+        currentStory = new Story(inkStoryJSON.text);
         canvasController.InitDialogue(currentStory);
     }
 
@@ -47,6 +49,10 @@ public class DialogueManager : Singleton<DialogueManager>
         currentStory.Continue();
         canvasController.NextDialogue();
     }
+
+    // empty for now
+    void OnEndOfDialogueReached()
+    {}
 }
 
 // Dialogue Manager business logic

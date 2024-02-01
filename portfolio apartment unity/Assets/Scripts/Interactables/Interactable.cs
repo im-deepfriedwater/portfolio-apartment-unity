@@ -1,5 +1,4 @@
 using cakeslice;
-using Ink.Runtime;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -14,8 +13,8 @@ public abstract class Interactable : MonoBehaviour
     {
       Outline = GetComponent<Outline>();
       Outline.eraseRenderer = true;
-      DialogueManager.Instance.StartDialogue.AddListener((Story _) => isInputActive = false);
-      DialogueManager.Instance.StartDialogue.AddListener((Story _) => isInputActive = true);
+      DialogueManager.Instance.StartDialogue.AddListener((TextAsset _) => isInputActive = false);
+      DialogueManager.Instance.StartDialogue.AddListener((TextAsset _) => isInputActive = true);
 
     }
 

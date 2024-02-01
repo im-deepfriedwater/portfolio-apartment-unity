@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 public class CanvasElementsController : MonoBehaviour
-{   
+{
     private Animator animator;
     private DialogueManager dialogueManager;
     private bool isReadyForInput = false;
@@ -70,7 +70,7 @@ public class CanvasElementsController : MonoBehaviour
     }
 
     public void NextDialogue()
-    {   
+    {
         bool hasRantTag = false;
         isDialogueDisplayFinished = false;
         goNextIndicator.SetActive(false);
@@ -99,7 +99,8 @@ public class CanvasElementsController : MonoBehaviour
             if (tag.Contains("anim"))
             {
                 ProcessAnimationTag(tag);
-            } else if (tag.Contains("rant"))
+            }
+            else if (tag.Contains("rant"))
             {
                 hasRantTag = true;
             }
@@ -162,14 +163,14 @@ public class CanvasElementsController : MonoBehaviour
     }
 
     void StartDisplayText(bool hasRantTag, string msg)
-    {   
+    {
         hasTriedToSkip = false;
         textDisplayCoroutine = DisplayText(hasRantTag, msg);
         StartCoroutine(textDisplayCoroutine);
     }
 
     IEnumerator DisplayText(bool isRant, string msg)
-    {   
+    {
         foreach (char c in msg)
         {
             if (!isRant && hasTriedToSkip)
@@ -199,7 +200,7 @@ public class CanvasElementsController : MonoBehaviour
     void OnHandleInputInterrupt()
     {
         if (!isReadyForInput) return;
-        
+
         if (!isDialogueDisplayFinished)
         {
             hasTriedToSkip = true;

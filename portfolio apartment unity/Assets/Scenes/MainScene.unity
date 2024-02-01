@@ -1167,6 +1167,58 @@ Transform:
   - {fileID: 195121337}
   m_Father: {fileID: 2006756318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &321203392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 321203393}
+  - component: {fileID: 321203394}
+  m_Layer: 0
+  m_Name: StoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &321203393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321203392}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1601958777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &321203394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321203392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43956cce04821c34d84fd0ea616c7015, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introStoryJSON: {fileID: 4900000, guid: 8309d842a46b0d94bb61c8a39d078bdd, type: 3}
+  IntroStoryEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  generalDialogueJSON: {fileID: 0}
+  GeneralDialogue:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &353294026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1256,7 +1308,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385073346}
   m_LocalRotation: {x: -0.06887521, y: -0.0000000018947177, z: 1.1058376e-12, w: -0.99762535}
-  m_LocalPosition: {x: 0, y: 0, z: -107}
+  m_LocalPosition: {x: 0, y: 0, z: -106.4}
   m_LocalScale: {x: 3.242369, y: 13.52508, z: 4.1983795}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1264,7 +1316,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -352.101, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.7, y: -4.6}
+  m_AnchoredPosition: {x: 31.6, y: -0.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &385073348
@@ -1682,6 +1734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 556499136}
+  - component: {fileID: 556499137}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1704,6 +1757,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1601958777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &556499137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556499135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11edc85a27d9c4a0782afa929cadf2fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &559428742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5213,7 +5278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1377598469
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6062,6 +6127,7 @@ Transform:
   - {fileID: 556499136}
   - {fileID: 1686929601}
   - {fileID: 2065436365}
+  - {fileID: 321203393}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1616486866 stripped
@@ -6193,7 +6259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5546d9c66d44b5d4083d5251ce7c36e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasController: {fileID: 0}
   NextDialogue:
     m_PersistentCalls:
       m_Calls: []
@@ -6203,6 +6268,10 @@ MonoBehaviour:
   EndOfDialogueReached:
     m_PersistentCalls:
       m_Calls: []
+  StartDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  canvasController: {fileID: 493350357}
 --- !u!4 &1702087048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b5e37660e15c6483aa983406a05e156c, type: 3}
@@ -7085,13 +7154,13 @@ MonoBehaviour:
   NavMeshClickEvent:
     m_PersistentCalls:
       m_Calls: []
-  showDialogue:
+  ShowDialogue:
     m_PersistentCalls:
       m_Calls: []
-  hideDialogue:
+  HideDialogue:
     m_PersistentCalls:
       m_Calls: []
-  playIntro:
+  PlayIntro:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &2075800874 stripped

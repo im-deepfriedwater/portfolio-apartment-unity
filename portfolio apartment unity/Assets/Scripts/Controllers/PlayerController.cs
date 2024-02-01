@@ -25,7 +25,7 @@ public class PlayerController : Singleton<PlayerController>
         animator = GetComponentsInChildren<Animator>()[0];
 
         EventManager.Instance.NavMeshClickEvent.AddListener(OnNavMeshClick);
-        DialogueManager.Instance.StartDialogue.AddListener((Story _) => canMove = false);
+        DialogueManager.Instance.StartDialogue.AddListener((TextAsset _) => canMove = false);
         DialogueManager.Instance.EndOfDialogueReached.AddListener(() => canMove = true);
     }
 
