@@ -6,6 +6,7 @@ public class FollowerController : Singleton<FollowerController>
     private Animator animator;
     private NavMeshAgent agent;
     private bool canMove = true;
+    private DialogueManager dialogueManager;
 
     private PlayerController player;
 
@@ -23,7 +24,11 @@ public class FollowerController : Singleton<FollowerController>
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentsInChildren<Animator>()[0];
         player = PlayerController.Instance;
+        dialogueManager = DialogueManager.Instance;
+
+        dialogueManager.EndOfDialogueReached.AddListener(() => animator.Play("Death"));
     }
+    
 
     // Update is called once per frame
     void Update()

@@ -65,6 +65,8 @@ public class CanvasElementsController : MonoBehaviour
     // forward.
     public void InitDialogue(Story story)
     {
+        body.text = "";
+        namePlate.text = "";
         currentStory = story;
         Show();
     }
@@ -73,7 +75,11 @@ public class CanvasElementsController : MonoBehaviour
     {
         bool hasRantTag = false;
         isDialogueDisplayFinished = false;
+        
         goNextIndicator.SetActive(false);
+
+        body.text = "";
+        namePlate.text = "";
 
         for (int i = 0; i < currentStory.currentTags.Count; i++)
         {
@@ -114,7 +120,6 @@ public class CanvasElementsController : MonoBehaviour
         Hide();
     }
 
-
     void ProcessAnimationTag(string tag)
     {
         string[] animationTags = tag.Split("_");
@@ -154,7 +159,7 @@ public class CanvasElementsController : MonoBehaviour
     // Called by the Show anim as an AnimationEvent when the anim finishes
     void OnShowAnimFinished()
     {
-        NextDialogue();
+        DialogueManager.Instance.NextDialogue.Invoke();
     }
 
     void OnHideAnimFinished()
@@ -164,6 +169,7 @@ public class CanvasElementsController : MonoBehaviour
 
     void StartDisplayText(bool hasRantTag, string msg)
     {
+        goNextIndicator.SetActive(false);
         hasTriedToSkip = false;
         textDisplayCoroutine = DisplayText(hasRantTag, msg);
         StartCoroutine(textDisplayCoroutine);
@@ -179,7 +185,7 @@ public class CanvasElementsController : MonoBehaviour
                 break;
             }
             body.text += c;
-            yield return null;
+            yield return new WaitForSeconds(0.3f);
         }
 
         HandleDialogueDisplayFinish();
@@ -195,6 +201,7 @@ public class CanvasElementsController : MonoBehaviour
     {
         isDialogueDisplayFinished = true;
         goNextIndicator.SetActive(true);
+        isReadyForInput = true;
     }
 
     void OnHandleInputInterrupt()

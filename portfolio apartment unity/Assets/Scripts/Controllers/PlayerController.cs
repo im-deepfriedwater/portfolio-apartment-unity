@@ -13,6 +13,9 @@ public class PlayerController : Singleton<PlayerController>
     private Animator animator;
     private NavMeshAgent agent;
     private bool canMove = false;
+    private DialogueManager dialogueManager;
+    private EventManager eventManager;
+    private StoryManager storyManager;
 
     private readonly float runDistanceThreshold = 3;
 
@@ -24,9 +27,15 @@ public class PlayerController : Singleton<PlayerController>
 
         animator = GetComponentsInChildren<Animator>()[0];
 
-        EventManager.Instance.NavMeshClickEvent.AddListener(OnNavMeshClick);
-        DialogueManager.Instance.StartDialogue.AddListener((TextAsset _) => canMove = false);
-        DialogueManager.Instance.EndOfDialogueReached.AddListener(() => canMove = true);
+        eventManager = EventManager.Instance;
+        eventManager.NavMeshClickEvent.AddListener(OnNavMeshClick);
+
+        dialogueManager = DialogueManager.Instance;
+        dialogueManager.EndOfDialogueReached.AddListener(OnEndOfDialogueReached);
+        dialogueManager.StartDialogue.AddListener(OnStartDialogue);
+
+        storyManager = StoryManager.Instance;
+        storyManager.IntroStoryEvent.AddListener(() => animator.Play("Death"));
     }
 
     // Update is called once per frame
@@ -34,17 +43,28 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (canMove)
         {
-          HandleCurrentMovement();
+            HandleCurrentMovement();
         }
+    }
+
+    void OnStartDialogue(TextAsset _)
+    {
+        canMove = false;
+    }
+
+    void OnEndOfDialogueReached()
+    {
+        canMove = true;
+        animator.Play("Idle");
     }
 
     void OnNavMeshClick(Ray ray)
     {
-      if (!canMove) return;
-      if (Physics.Raycast(ray, out RaycastHit hit))
-      {
-        agent.SetDestination(hit.point);
-      }
+        if (!canMove) return;
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            agent.SetDestination(hit.point);
+        }
     }
 
     void HandleCurrentMovement()
