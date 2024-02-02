@@ -7,6 +7,7 @@ public class CanvasElementsController : MonoBehaviour
 {
     private Animator animator;
     private DialogueManager dialogueManager;
+    private SoundManager soundManager;
     private bool isReadyForInput = false;
     private bool hasTriedToSkip = false;
     private bool isDialogueDisplayFinished = false;
@@ -38,6 +39,7 @@ public class CanvasElementsController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         dialogueManager = DialogueManager.Instance;
+        soundManager = SoundManager.Instance;
     }
 
     // Update is called once per frame
@@ -47,7 +49,7 @@ public class CanvasElementsController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            dialogueManager.NextDialogue.Invoke();
+            OnHandleInputInterrupt();
         }
     }
 
@@ -74,7 +76,14 @@ public class CanvasElementsController : MonoBehaviour
     public void NextDialogue()
     {
         bool hasRantTag = false;
+        bool hasLeftAnim = false;
+        bool hasRightAnim = false;
+
+        bool isLeftSpeaker = false;
+        bool isRightSpeaker = false;
+
         isDialogueDisplayFinished = false;
+        hasTriedToSkip = false;
         
         goNextIndicator.SetActive(false);
 
@@ -88,28 +97,54 @@ public class CanvasElementsController : MonoBehaviour
             {
                 if (tag == "rcr")
                 {
+                    isRightSpeaker = true;
                     ProcessNameTag("Recruiter (she/her)", "right");
                 }
                 else if (tag == "jt")
-                {
+                {   
+                    isLeftSpeaker = true;
                     ProcessNameTag("Justin (he/him)", "left");
                 }
                 else if (tag == "narrator")
                 {
+                    isLeftSpeaker = true;
                     ProcessNameTag("Narrator", "left");
-
                 }
                 continue;
             }
 
             if (tag.Contains("anim"))
             {
+                if (tag.Contains("left")) hasLeftAnim = true;
+                if (tag.Contains("right")) hasRightAnim = true;
+                if (tag.Contains("both"))
+                {
+                    hasLeftAnim = true;
+                    hasRightAnim = true;
+                }
+
                 ProcessAnimationTag(tag);
             }
             else if (tag.Contains("rant"))
             {
                 hasRantTag = true;
             }
+        }
+
+        if (isLeftSpeaker)
+        {
+            if (!hasLeftAnim) left.PlayAnimation("speaking");
+            if (!hasRightAnim) right.PlayAnimation("idle");
+        } 
+        else if (isRightSpeaker)
+        {
+            if (!hasLeftAnim) left.PlayAnimation("idle");
+            if (!hasRightAnim) right.PlayAnimation("speaking");
+        } 
+        else
+        {
+            left.PlayAnimation("idle");
+            right.PlayAnimation("idle");
         }
 
         StartDisplayText(hasRantTag, currentStory.currentText);
@@ -122,9 +157,10 @@ public class CanvasElementsController : MonoBehaviour
 
     void ProcessAnimationTag(string tag)
     {
+        Debug.Log(tag);
         string[] animationTags = tag.Split("_");
-        string animationTarget = animationTags[1];
-        string animationName = animationTags[2];
+        string animationTarget = animationTags[1].ToLower();
+        string animationName = animationTags[2].ToLower();
 
         switch (animationTarget)
         {
@@ -167,7 +203,7 @@ public class CanvasElementsController : MonoBehaviour
         dialogueManager.EndOfDialogueReached.Invoke();
     }
 
-    void StartDisplayText(bool hasRantTag, string msg)
+    void StartDisplayText(bool hasRantTag, string msg, bool isLeftSpeaker, bool isRightSpeaker)
     {
         goNextIndicator.SetActive(false);
         hasTriedToSkip = false;
@@ -175,7 +211,7 @@ public class CanvasElementsController : MonoBehaviour
         StartCoroutine(textDisplayCoroutine);
     }
 
-    IEnumerator DisplayText(bool isRant, string msg)
+    IEnumerator DisplayText(bool isRant, string msg, bool isLeftSpeaker, bool isRightSpeaker)
     {
         foreach (char c in msg)
         {
@@ -185,7 +221,9 @@ public class CanvasElementsController : MonoBehaviour
                 break;
             }
             body.text += c;
-            yield return new WaitForSeconds(0.3f);
+
+            soundManager.PlayDialogueBlipEvent();
+            yield return new WaitForSeconds(0.1f);
         }
 
         HandleDialogueDisplayFinish();
