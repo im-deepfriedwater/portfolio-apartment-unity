@@ -14,26 +14,32 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField]
     private AudioSource dialogueBlipSource;
 
-    [SerializeField]
-    private AudioSource playerFootstepsSource;
-
-    [SerializeField]
-    private AudioSource followerFootstepsSource;
-
-    [SerializeField]
-    private AudioSource dialogueExclaimSource;
-
     [HideInInspector]
     public PlaySoundEvent PlayDialogueBlipEvent;
-    
-    [HideInInspector]
-    public PlaySoundEvent PlayDialogueExclaimEvent;
+
+    [SerializeField]
+    private AudioSource playerFootstepsSource;
     
     [HideInInspector]
     public PlaySoundEvent PlayPlayerFootstepsEvent;
 
+    [SerializeField]
+    private AudioSource followerFootstepsSource;
+
     [HideInInspector]
     public PlaySoundEvent PlayFollowerFootstepsEvent;
+
+    [SerializeField]
+    private AudioSource dialogueExclaimSource;
+    
+    [HideInInspector]
+    public PlaySoundEvent PlayDialogueExclaimEvent;
+
+    [SerializeField]
+    private AudioSource dialogueSFXSource;
+
+    [HideInInspector]
+    public PlaySoundEvent PlayGlassBreakingEvent;
 
     [HideInInspector]
     public UnityEvent ToggleMuteEvent;
@@ -54,7 +60,8 @@ public class SoundManager : Singleton<SoundManager>
         PlayDialogueExclaimEvent.AddListener((AudioClip clip) => OnPlayAudio(dialogueExclaimSource, clip));
         PlayPlayerFootstepsEvent.AddListener((AudioClip clip) => OnPlayAudio(playerFootstepsSource, clip));
         PlayFollowerFootstepsEvent.AddListener((AudioClip clip) => OnPlayAudio(followerFootstepsSource, clip));
-        
+        PlayGlassBreakingEvent.AddListener((AudioClip clip) => OnPlayAudio(dialogueSFXSource, clip));
+
         ChangeVolumeEvent.AddListener((float newVolume) => globalVolume = newVolume);
         ToggleMuteEvent.AddListener(() => isMuted = !isMuted); 
     }

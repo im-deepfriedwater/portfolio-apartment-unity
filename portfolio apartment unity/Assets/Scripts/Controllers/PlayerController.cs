@@ -1,6 +1,6 @@
-using Ink.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class PlayerController : Singleton<PlayerController>
 {

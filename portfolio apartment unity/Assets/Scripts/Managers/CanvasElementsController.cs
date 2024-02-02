@@ -34,6 +34,16 @@ public class CanvasElementsController : MonoBehaviour
     [SerializeField]
     private GameObject goNextIndicator;
 
+    [SerializeField]
+    private AudioClip glassBreakingClip;
+
+    [SerializeField]
+    private AudioClip exclaimClip;
+
+    [SerializeField]
+    private AudioClip narratorClip;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,9 +92,11 @@ public class CanvasElementsController : MonoBehaviour
         bool isLeftSpeaker = false;
         bool isRightSpeaker = false;
 
+        AudioClip speakerClip;
+
         isDialogueDisplayFinished = false;
         hasTriedToSkip = false;
-        
+
         goNextIndicator.SetActive(false);
 
         body.text = "";
@@ -101,7 +113,7 @@ public class CanvasElementsController : MonoBehaviour
                     ProcessNameTag("Recruiter (she/her)", "right");
                 }
                 else if (tag == "jt")
-                {   
+                {
                     isLeftSpeaker = true;
                     ProcessNameTag("Justin (he/him)", "left");
                 }
@@ -128,6 +140,10 @@ public class CanvasElementsController : MonoBehaviour
             else if (tag.Contains("rant"))
             {
                 hasRantTag = true;
+            } else if (tag.Contains("exclaim"))
+            {
+                if (tag.Contains("left")) left.ShowExclaimEvent.Invoke();
+                if (tag.Contains("right")) right.ShowExclaimEvent.Invoke();
             }
         }
 
@@ -135,19 +151,22 @@ public class CanvasElementsController : MonoBehaviour
         {
             if (!hasLeftAnim) left.PlayAnimation("speaking");
             if (!hasRightAnim) right.PlayAnimation("idle");
-        } 
+            speakerClip = left.DialogueBlip;
+        }
         else if (isRightSpeaker)
         {
             if (!hasLeftAnim) left.PlayAnimation("idle");
             if (!hasRightAnim) right.PlayAnimation("speaking");
-        } 
+            speakerClip = right.DialogueBlip;
+        }
         else
         {
             left.PlayAnimation("idle");
             right.PlayAnimation("idle");
+            speakerClip = narratorClip;
         }
 
-        StartDisplayText(hasRantTag, currentStory.currentText);
+        StartDisplayText(hasRantTag, currentStory.currentText, speakerClip);
     }
 
     public void EndDialogue()
@@ -157,7 +176,6 @@ public class CanvasElementsController : MonoBehaviour
 
     void ProcessAnimationTag(string tag)
     {
-        Debug.Log(tag);
         string[] animationTags = tag.Split("_");
         string animationTarget = animationTags[1].ToLower();
         string animationName = animationTags[2].ToLower();
@@ -203,27 +221,64 @@ public class CanvasElementsController : MonoBehaviour
         dialogueManager.EndOfDialogueReached.Invoke();
     }
 
-    void StartDisplayText(bool hasRantTag, string msg, bool isLeftSpeaker, bool isRightSpeaker)
+    void StartDisplayText(bool hasRantTag, string msg, AudioClip speakerClip)
     {
         goNextIndicator.SetActive(false);
         hasTriedToSkip = false;
-        textDisplayCoroutine = DisplayText(hasRantTag, msg);
+        textDisplayCoroutine = DisplayText(hasRantTag, msg, speakerClip);
         StartCoroutine(textDisplayCoroutine);
     }
 
-    IEnumerator DisplayText(bool isRant, string msg, bool isLeftSpeaker, bool isRightSpeaker)
+    IEnumerator DisplayText(bool isRant, string msg, AudioClip speakerClip)
     {
+        bool isFirstChar = true;
+        bool isOverflow = false;
+        
+        overflowChecker.text = "" + msg[0];
+
+        int i = 0;
+
         foreach (char c in msg)
-        {
+        {   
             if (!isRant && hasTriedToSkip)
             {
                 FinishText(msg);
                 break;
             }
-            body.text += c;
 
-            soundManager.PlayDialogueBlipEvent();
-            yield return new WaitForSeconds(0.1f);
+            if (!isFirstChar)
+            {
+                overflowChecker.text += msg[i + 1];
+                isOverflow = overflowChecker.isTextOverflowing;            
+            } 
+            else 
+            {
+                isFirstChar = false;
+            }
+
+            if (isOverflow)
+            {       
+                overflowChecker.text = "" + msg[i + 1];
+                body.text = "";
+            }
+            else
+            {
+            }
+
+            body.text += c;
+            i += 1;
+
+            soundManager.PlayDialogueBlipEvent.Invoke(speakerClip);
+
+            if (!isRant)
+            {
+                yield return new WaitForSeconds(0.1f);
+            } 
+            else 
+            {
+                yield return new WaitForSeconds(0.07f);
+            }
+
         }
 
         HandleDialogueDisplayFinish();
