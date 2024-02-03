@@ -65,6 +65,11 @@ public class CanvasElementsController : MonoBehaviour
         }
     }
 
+    void HideName()
+    {
+        namePlate.text = "???";
+    }
+
     void ProcessNameTag(string newValue, string side)
     {
         namePlate.text = newValue;
@@ -100,31 +105,35 @@ public class CanvasElementsController : MonoBehaviour
         hasTriedToSkip = false;
 
         goNextIndicator.SetActive(false);
+        left.HideIndicator();
+        right.HideIndicator();
 
         body.text = "";
         namePlate.text = "";
 
-        for (int i = 0; i < currentStory.currentTags.Count; i++)
+        foreach (string currentTag in currentStory.currentTags)
         {
-            string tag = currentStory.currentTags[i].ToLower();
-            if (i == 0)
+            string tag = currentTag.ToLower();
+
+            if (tag == "rcr")
             {
-                if (tag == "rcr")
-                {
-                    isRightSpeaker = true;
-                    ProcessNameTag("Recruiter (she/her)", "right");
-                }
-                else if (tag == "jt")
-                {
-                    isLeftSpeaker = true;
-                    ProcessNameTag("Justin (he/him)", "left");
-                }
-                else if (tag == "narrator")
-                {
-                    isLeftSpeaker = true;
-                    ProcessNameTag("Narrator", "left");
-                }
-                continue;
+                isRightSpeaker = true;
+                ProcessNameTag("Recruiter (she/her)", "right");
+            }
+            else if (tag == "jt")
+            {
+                isLeftSpeaker = true;
+                ProcessNameTag("Justin (he/him)", "left");
+            }
+            else if (tag == "narrator")
+            {
+                isLeftSpeaker = true;
+                ProcessNameTag("Narrator", "left");
+            }
+                            
+            if (tag.Contains("hide_speaker"))
+            {
+                HideName();
             }
 
             if (tag.Contains("anim"))
@@ -254,11 +263,11 @@ public class CanvasElementsController : MonoBehaviour
 
             if (!isRant)
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.08f);
             } 
             else 
             {
-                yield return new WaitForSeconds(0.07f);
+                yield return new WaitForSeconds(0.05f);
             }
         }
 

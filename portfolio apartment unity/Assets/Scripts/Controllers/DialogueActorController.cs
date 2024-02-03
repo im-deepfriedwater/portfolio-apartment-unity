@@ -25,4 +25,9 @@ public class DialogueActorController : MonoBehaviour
         var animName = animationTagName[0].ToString().ToUpper() + animationTagName.Substring(1);
         animator.Play($"Base Layer.{animName}");
     }
+
+    public void HideIndicator()
+    {
+        exclaimIndicator.HideExclaim();
+    }
 }

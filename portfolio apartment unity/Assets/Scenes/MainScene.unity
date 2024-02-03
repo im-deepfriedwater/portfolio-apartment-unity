@@ -7834,7 +7834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2049139304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9552,11 +9552,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &2255844000012768623 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6644979179329795864, guid: c4c2f5860d4998744afc9c897a23ab87, type: 3}
-  m_PrefabInstance: {fileID: 5099243524327992967}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2276360924103391292
 Transform:
   m_ObjectHideFlags: 0
@@ -10307,6 +10302,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8227353164821873820, guid: c4c2f5860d4998744afc9c897a23ab87, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8227353164821873820, guid: c4c2f5860d4998744afc9c897a23ab87, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -10709,6 +10708,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 307887495786509266, guid: c4c2f5860d4998744afc9c897a23ab87, type: 3}
   m_PrefabInstance: {fileID: 5099243524327992967}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6110828938372309487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2531339974986868573, guid: c4c2f5860d4998744afc9c897a23ab87, type: 3}
+  m_PrefabInstance: {fileID: 5099243524327992967}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a1180f0b595fc4183ce3736d41b363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6140784562513344838
 GameObject:
   m_ObjectHideFlags: 0
@@ -11196,7 +11206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5626016441357593606}
-  exclaimIndicator: {fileID: 2255844000012768623}
+  exclaimIndicator: {fileID: 6110828938372309487}
   DialogueBlip: {fileID: 8300000, guid: 8542bce484a3a37468616556908668be, type: 3}
   ShowExclaimEvent:
     m_PersistentCalls:

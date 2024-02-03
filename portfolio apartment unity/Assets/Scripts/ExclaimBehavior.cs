@@ -23,9 +23,16 @@ public class ExclaimBehaviour : MonoBehaviour
 
     public void ShowExclaim()
     {   
+        Debug.Log("test");
         spriteRenderer.enabled = true;
         animator.Play("Base Layer.BounceAndFadeOut");
         soundManager.PlayDialogueExclaimEvent.Invoke(exclaimClip);
+    }
+
+    public void HideExclaim()
+    {   
+        spriteRenderer.enabled = false;
+        spriteRenderer.color = new Color(0, 0, 0, 0);
     }
 
     void OnAnimBounceAndFadeOutFinished()
