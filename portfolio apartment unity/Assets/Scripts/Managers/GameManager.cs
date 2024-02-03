@@ -1,9 +1,12 @@
+using UnityEngine.Events;
+
 public class GameManager : Singleton<GameManager>
 {
+    public UnityEvent StartGame;
+
     // Start is called before the first frame update
     void Start()
-    {
-        StoryManager.Instance.IntroStoryEvent.Invoke();
+    {   
+        StartGame.AddListener(() => StoryManager.Instance.IntroStoryEvent.Invoke());
     }
-
 }

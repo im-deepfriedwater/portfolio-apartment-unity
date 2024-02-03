@@ -7,7 +7,7 @@ public class DialogueActorController : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
-    private GameObject exclaimIndicator;
+    private ExclaimBehaviour exclaimIndicator;
 
     public AudioClip DialogueBlip;
 
@@ -16,7 +16,7 @@ public class DialogueActorController : MonoBehaviour
 
     void Start()
     {
-        ShowExclaimEvent.AddListener(() => exclaimIndicator.SetActive(true));
+        ShowExclaimEvent.AddListener(() => exclaimIndicator.ShowExclaim());
     }
 
     // e.g. animationTagName = "shocked"

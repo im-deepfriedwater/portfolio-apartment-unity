@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using Ink.Runtime;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class CanvasElementsController : MonoBehaviour
@@ -196,7 +198,7 @@ public class CanvasElementsController : MonoBehaviour
                 break;
 
             default:
-                throw new System.Exception($"CanvasElementController: Bad param for animation target passed {animationTarget}");
+                throw new Exception($"CanvasElementController: Bad param for animation target passed {animationTarget}");
         }
     }
 
@@ -213,7 +215,7 @@ public class CanvasElementsController : MonoBehaviour
     // Called by the Show anim as an AnimationEvent when the anim finishes
     void OnShowAnimFinished()
     {
-        DialogueManager.Instance.NextDialogue.Invoke();
+        dialogueManager.NextDialogue.Invoke();
     }
 
     void OnHideAnimFinished()
@@ -222,7 +224,7 @@ public class CanvasElementsController : MonoBehaviour
     }
 
     void StartDisplayText(bool hasRantTag, string msg, AudioClip speakerClip)
-    {
+    {   
         goNextIndicator.SetActive(false);
         hasTriedToSkip = false;
         textDisplayCoroutine = DisplayText(hasRantTag, msg, speakerClip);
@@ -231,11 +233,6 @@ public class CanvasElementsController : MonoBehaviour
 
     IEnumerator DisplayText(bool isRant, string msg, AudioClip speakerClip)
     {
-        bool isFirstChar = true;
-        bool isOverflow = false;
-        
-        overflowChecker.text = "" + msg[0];
-
         int i = 0;
 
         foreach (char c in msg)
@@ -246,29 +243,14 @@ public class CanvasElementsController : MonoBehaviour
                 break;
             }
 
-            if (!isFirstChar)
-            {
-                overflowChecker.text += msg[i + 1];
-                isOverflow = overflowChecker.isTextOverflowing;            
-            } 
-            else 
-            {
-                isFirstChar = false;
-            }
-
-            if (isOverflow)
-            {       
-                overflowChecker.text = "" + msg[i + 1];
-                body.text = "";
-            }
-            else
-            {
-            }
-
             body.text += c;
-            i += 1;
-
             soundManager.PlayDialogueBlipEvent.Invoke(speakerClip);
+
+            if (i + 1 < msg.Length)
+            {
+                overflowChecker.text += string.Copy(body.text) + msg[i + 1];
+                if (isRant && overflowChecker.isTextOverflowing) body.text = "";
+            }
 
             if (!isRant)
             {
@@ -278,7 +260,6 @@ public class CanvasElementsController : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.07f);
             }
-
         }
 
         HandleDialogueDisplayFinish();

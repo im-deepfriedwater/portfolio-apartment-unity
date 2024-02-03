@@ -35,7 +35,8 @@ public class PlayerController : Singleton<PlayerController>
         dialogueManager.StartDialogue.AddListener(OnStartDialogue);
 
         storyManager = StoryManager.Instance;
-        storyManager.IntroStoryEvent.AddListener(() => animator.Play("Death"));
+
+        animator.Play("Death");
     }
 
     // Update is called once per frame
