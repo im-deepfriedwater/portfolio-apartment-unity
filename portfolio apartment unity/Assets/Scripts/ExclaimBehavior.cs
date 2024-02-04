@@ -23,7 +23,6 @@ public class ExclaimBehaviour : MonoBehaviour
 
     public void ShowExclaim()
     {   
-        Debug.Log("test");
         spriteRenderer.enabled = true;
         animator.Play("Base Layer.BounceAndFadeOut");
         soundManager.PlayDialogueExclaimEvent.Invoke(exclaimClip);
