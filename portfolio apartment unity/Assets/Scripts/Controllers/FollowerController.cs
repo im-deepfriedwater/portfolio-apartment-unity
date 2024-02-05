@@ -26,7 +26,7 @@ public class FollowerController : Singleton<FollowerController>
         player = PlayerController.Instance;
         dialogueManager = DialogueManager.Instance;
 
-        dialogueManager.EndOfDialogueReached.AddListener(() => animator.Play("Death"));
+        dialogueManager.EndOfDialogueReached.AddListener(() => animator.Play("Idle"));
     }
     
 

@@ -29,7 +29,6 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         NextDialogue.AddListener(OnNextDialogue);
         StartDialogue.AddListener(OnStartDialogue);
-        EndOfDialogueReached.AddListener(OnEndOfDialogueReached);
     }
 
     void OnStartDialogue(TextAsset inkStoryJSON)
@@ -43,16 +42,13 @@ public class DialogueManager : Singleton<DialogueManager>
         if (!currentStory.canContinue)
         {
             canvasController.EndDialogue();
+            EndOfDialogueReached.Invoke();
             return;
         }
 
         currentStory.Continue();
         canvasController.NextDialogue();
     }
-
-    // empty for now
-    void OnEndOfDialogueReached()
-    {}
 }
 
 // Dialogue Manager business logic

@@ -24,15 +24,15 @@ You can call me Recruiter and I use she/her pronouns. # rcr
 
 Do go on! # rcr
 
-And I do happen to be looking for work right now. # jt
+Hm, and I actually happen to be looking for work right now. # jt
 
 Perfect! How about we try this? # rcr
 
 I see some interesting projects laid out around here. # rcr 
 I'll walk around using the mouse and left click. # rcr 
-Anything I'm curious will light up and I can left click- # rcr
--on them to prompt you to talk about them. # rcr
-If I want to ask about yourself I'll left click. # rcr
+Anything I'm curious about will light up and I can left click- # rcr
+-on it to prompt you to talk about them. # rcr
+If I want to ask about yourself I'll left click on you. # rcr
 Then, we can have a good ol' fashioned dialogue about it. # rcr
 
 Oddly specific but sounds professional. Let's do it! # jt

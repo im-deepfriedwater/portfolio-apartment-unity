@@ -4,7 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Outline))]
 public abstract class Interactable : MonoBehaviour
-{
+{   
+    [SerializeField]
+    private Outline[] childrenOutlines;
     private bool isInputActive = false; 
     protected Outline Outline;
 
@@ -14,8 +16,7 @@ public abstract class Interactable : MonoBehaviour
       Outline = GetComponent<Outline>();
       Outline.eraseRenderer = true;
       DialogueManager.Instance.StartDialogue.AddListener((TextAsset _) => isInputActive = false);
-      DialogueManager.Instance.StartDialogue.AddListener((TextAsset _) => isInputActive = true);
-
+      DialogueManager.Instance.EndOfDialogueReached.AddListener(() => isInputActive = true);
     }
 
     // Update is called once per frame
@@ -27,10 +28,21 @@ public abstract class Interactable : MonoBehaviour
     {
       if (!isInputActive) return;
       Outline.eraseRenderer = false;
+
+      foreach (var childOutline in childrenOutlines)
+      {
+        childOutline.eraseRenderer = false;
+      }
     }
 
     public virtual void OnMouseExit()
     {
       Outline.eraseRenderer = true;
+
+      
+      foreach (var childOutline in childrenOutlines)
+      {
+        childOutline.eraseRenderer = true;
+      }
     }
 }
