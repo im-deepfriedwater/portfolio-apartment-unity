@@ -15,7 +15,7 @@ public class ExclaimBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {   
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         spriteRenderer.enabled = false;
         soundManager = SoundManager.Instance;
         animator = GetComponent<Animator>();

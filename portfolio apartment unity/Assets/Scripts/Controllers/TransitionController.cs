@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TransitionController : MonoBehaviour
 {
@@ -8,12 +9,21 @@ public class TransitionController : MonoBehaviour
     [SerializeField]
     AudioClip glassBreaking;
 
-    
+    private Image image;
+
+    [SerializeField]
+    private bool isDebug = false;
 
     void Start()
     {
         gameManager = GameManager.Instance;
         soundManager = SoundManager.Instance;
+        image = GetComponent<Image>();
+
+        if (isDebug)
+        {
+            image.enabled = true;
+        }
     }
 
     public void OnAnimTransitionSlideOutStart()

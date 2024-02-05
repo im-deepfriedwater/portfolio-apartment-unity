@@ -1,13 +1,13 @@
 ... # rcr # anim_both_shocked # exclaim_left # hide_speaker
 ... !! # jt # anim_both_shocked # hide_speaker
 ...... # rcr # anim_both_shocked # hide_speaker
-That was exciting! Anyways, pleased to meet you. I'm- # rcr # anim_left_shocked # hide_speaker
-WHAT!! You just come crashing through my window??? # jt # anim_both_shocked # exclaim_left # hide_speaker
-Oh. Well it wouldn't open from the outside.  # rcr # anim_left_shocked # hide_speaker
-I think it was the next logical action. # rcr # anim_left_shocked
+Well, that was exciting! Anyways, a pleasure. I'm- # rcr # anim_left_shocked # hide_speaker
+WAIT!!! WHAT?? You just came crashing through my window- # jt # anim_both_shocked # exclaim_right # hide_speaker
+Oh. Well, it wouldn't open from the outside.  # rcr # anim_left_shocked # hide_speaker # exclaim_left
+I think this was the next most logical action. # rcr # anim_left_shocked # hide_speaker
 ... # jt # anim_left_idle # hide_speaker
-AS I was saying, I'm a recruiter with a nose for a good talent! # rcr # hide_speaker
-And on my daily bagel run- they run a really good shop over there I'll give you the address- my nose smelled a smell of great talent! So, tell me about yourself! # rcr # rant # anim_left_shocked # hide_speaker
+AS I was saying, I'm a recruiter with a nose for professional potential! # rcr # hide_speaker
+And on my daily bagel run- they run a really good shop over there I'll give you the address- my nose smelled a smell of great talent ! So, tell me about yourself! # rcr # rant # anim_left_shocked # hide_speaker
 
 The recruiter begins dusting off broken glass shards from the fresh bagel that was in their pocket. # narrator # anim_right_speaking # anim_left_shocked # hide_speaker
 
