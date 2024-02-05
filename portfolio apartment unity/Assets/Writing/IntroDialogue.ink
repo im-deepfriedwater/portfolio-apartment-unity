@@ -1,29 +1,41 @@
-... # rcr # anim_both_shocked # exclaim_left # hide_speaker
-... !! # jt # anim_both_shocked # hide_speaker
-...... # rcr # anim_both_shocked # hide_speaker
+... # rcr # anim_both_shocked # exclaim_left # hide_speaker # silent
+... !! # jt # anim_both_shocked # hide_speaker # silent
+...... # rcr # anim_both_shocked # hide_speaker # silent
 Well, that was exciting! Anyways, a pleasure. I'm- # rcr # anim_left_shocked # hide_speaker
-WAIT!!! WHAT?? You just came crashing through my window- # jt # anim_both_shocked # exclaim_right # hide_speaker
-Oh. Well, it wouldn't open from the outside.  # rcr # anim_left_shocked # hide_speaker # exclaim_left
-I think this was the next most logical action. # rcr # anim_left_shocked # hide_speaker
-... # jt # anim_left_idle # hide_speaker
-AS I was saying, I'm a recruiter with a nose for professional potential! # rcr # hide_speaker
-And on my daily bagel run- they run a really good shop over there I'll give you the address- my nose smelled a smell of great talent ! So, tell me about yourself! # rcr # rant # anim_left_shocked # hide_speaker
+WAIT!!! WHAT?? You just came crashing through my window! # jt # anim_both_shocked # exclaim_right # hide_speaker
+Oh. Well, it wouldn't open from the outside.  # rcr # anim_left_shocked # hide_speaker
+I think this was the next logical action actually! # rcr # anim_left_shocked # hide_speaker
+............ # jt # anim_left_idle # hide_speaker # speaker
+AS I was saying, I'm a recruiter with a nose for talent! # rcr # hide_speaker
+On my daily bagel run (there's a pretty good place near here) # rcr # hide_speaker
+-my nose smelled a great deal of potential! # rcr # hide_speaker 
 
-The recruiter begins dusting off broken glass shards from the fresh bagel that was in their pocket. # narrator # anim_right_speaking # anim_left_shocked # hide_speaker
+So, tell me about yourself! # rcr # rant # hide_speaker
 
-Uh. Right. Erm, my name is Justin and I use pronouns he/him. # jt
+The recruiter begins dusting off broken glass shards from- # narrator # anim_right_speaking # anim_left_shocked
+-the freshly baked bagel stashed in their pocket. # narrator # anim_right_speaking
 
-Excellent, pleased to meet you. You can call me Recruiter and I use she/her pronouns. # rcr
+Erm, my name is Justin and I use he/him pronouns. # jt # exclaim_left
 
-She grabs a glass-free bite out of her bagel. She mumbles with a mouthful of bagel. # narrator
+Excellent, pleased to meet you. # rcr # hide_speaker
+She grabs a glass-free bite out of her bagel and mumbles aloud. # narrator
+You can call me Recruiter and I use she/her pronouns. # rcr 
+
 
 Do go on! # rcr
 
-And well I do happen to be looking for work! # jt
+And I do happen to be looking for work right now. # jt
 
-Let's do this then. I see some interesting projects laid out around your apartment. How about I walk around the apartment using the <b> mouse </b> and <b> left click</b> to see what they're on about. And if I want to get to know more about you I'll <b> left click </b> on you and we can have a good ol' fashioned dialogue about it. # rcr
+Perfect! How about we try this? # rcr
 
-Very specific but I guess you're the professional! # jt
+I see some interesting projects laid out around here. # rcr 
+I'll walk around using the mouse and left click. # rcr 
+Anything I'm curious will light up and I can left click- # rcr
+-on them to prompt you to talk about them. # rcr
+If I want to ask about yourself I'll left click. # rcr
+Then, we can have a good ol' fashioned dialogue about it. # rcr
+
+Oddly specific but sounds professional. Let's do it! # jt
 
 
 -> END

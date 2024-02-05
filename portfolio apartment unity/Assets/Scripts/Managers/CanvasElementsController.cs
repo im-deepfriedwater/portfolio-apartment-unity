@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using Ink.Runtime;
 using TMPro;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class CanvasElementsController : MonoBehaviour
 {
     private Animator animator;
+
     private DialogueManager dialogueManager;
     private SoundManager soundManager;
     private bool isReadyForInput = false;
@@ -44,6 +44,9 @@ public class CanvasElementsController : MonoBehaviour
 
     [SerializeField]
     private AudioClip narratorClip;
+
+    [SerializeField]
+    private Animator uiActorAnimator;
 
 
     // Start is called before the first frame update
@@ -98,6 +101,9 @@ public class CanvasElementsController : MonoBehaviour
 
         bool isLeftSpeaker = false;
         bool isRightSpeaker = false;
+        bool isNarrator = false;
+
+        bool isSilent = false;
 
         AudioClip speakerClip;
 
@@ -109,6 +115,7 @@ public class CanvasElementsController : MonoBehaviour
         right.HideIndicator();
 
         body.text = "";
+        overflowChecker.text = "";
         namePlate.text = "";
 
         foreach (string currentTag in currentStory.currentTags)
@@ -128,7 +135,12 @@ public class CanvasElementsController : MonoBehaviour
             else if (tag == "narrator")
             {
                 isLeftSpeaker = true;
+                isNarrator = true;
                 ProcessNameTag("Narrator", "left");
+            }
+            else if (tag == "silent")
+            {
+                isSilent = true;
             }
                             
             if (tag.Contains("hide_speaker"))
@@ -159,13 +171,16 @@ public class CanvasElementsController : MonoBehaviour
         }
 
         if (isLeftSpeaker)
-        {
-            if (!hasLeftAnim) left.PlayAnimation("speaking");
+        {     
+            if (!isNarrator && !isSilent) uiActorAnimator.Play("ShowLeft");
+            if (!hasLeftAnim && !isNarrator) left.PlayAnimation("speaking");
+            if (!hasLeftAnim && isNarrator) left.PlayAnimation("idle");
             if (!hasRightAnim) right.PlayAnimation("idle");
-            speakerClip = left.DialogueBlip;
+            speakerClip = narratorClip;
         }
         else if (isRightSpeaker)
         {
+            if (!isSilent) uiActorAnimator.Play("ShowRight");
             if (!hasLeftAnim) left.PlayAnimation("idle");
             if (!hasRightAnim) right.PlayAnimation("speaking");
             speakerClip = right.DialogueBlip;
@@ -257,7 +272,7 @@ public class CanvasElementsController : MonoBehaviour
 
             if (i + 1 < msg.Length)
             {
-                overflowChecker.text += string.Copy(body.text) + msg[i + 1];
+                overflowChecker.text = string.Copy(body.text) + msg[i + 1];
                 if (isRant && overflowChecker.isTextOverflowing) body.text = "";
             }
 
@@ -267,7 +282,7 @@ public class CanvasElementsController : MonoBehaviour
             } 
             else 
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.07f);
             }
         }
 
@@ -277,6 +292,11 @@ public class CanvasElementsController : MonoBehaviour
     void FinishText(string msg)
     {
         body.text = msg;
+
+        // not necessary but
+        // possibly nice for consistency
+        overflowChecker.text = msg;
+
         HandleDialogueDisplayFinish();
     }
 
