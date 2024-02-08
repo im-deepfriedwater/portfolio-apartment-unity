@@ -46,7 +46,6 @@ public class SoundManager : Singleton<SoundManager>
     [HideInInspector]
     public FloatEvent ChangeVolumeEvent;
 
-
     [SerializeField]
     private float globalVolume = 1f;
 

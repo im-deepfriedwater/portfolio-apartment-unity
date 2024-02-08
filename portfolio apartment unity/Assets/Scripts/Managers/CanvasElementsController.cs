@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CanvasElementsController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject choicePrefab;
     private Animator animator;
 
     private DialogueManager dialogueManager;
@@ -90,7 +92,20 @@ public class CanvasElementsController : MonoBehaviour
         body.text = "";
         namePlate.text = "";
         currentStory = story;
-        Show();
+
+        if (story.currentChoices.Count > 0)
+        {
+            ShowChoices();
+        }
+        else
+        {
+            Show();
+        }
+    }
+
+    private void ShowChoices()
+    {
+
     }
 
     public void NextDialogue()
