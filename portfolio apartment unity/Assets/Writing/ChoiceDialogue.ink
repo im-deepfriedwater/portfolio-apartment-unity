@@ -1,7 +1,6 @@
 
 -> start
 
-
 === start ===
 What should I ask? # rcr
 * [Tell me about yourself] -> tell_me_about_yourself

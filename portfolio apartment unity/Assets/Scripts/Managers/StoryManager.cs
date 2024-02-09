@@ -1,16 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+// This class feels unneeded. Leaving for now but
+// could be refactored or repurposed. 
 public class StoryManager : Singleton<StoryManager>
 {
     [SerializeField]
     private TextAsset introStoryJSON;
-    public UnityEvent IntroStoryEvent;
-
-    [SerializeField]
-    private TextAsset generalDialogueJSON;
-    public UnityEvent GeneralDialogue;
-    
+    public UnityEvent IntroStoryEvent;    
 
     private DialogueManager dialogueManager;
 
