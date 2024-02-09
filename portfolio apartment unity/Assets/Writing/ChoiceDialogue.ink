@@ -1,4 +1,3 @@
-VAR seen_one_choice = false
 
 -> start
 
@@ -12,6 +11,8 @@ What should I ask? # rcr
 * [Why make all of this?] -> why_make_this
 * [What kind of work are you interested in?] -> what_kind_of_work
 * [How much will it cost to repair your window? # hide_on_first_show] -> repair_window
+* [Go back] -> DONE
+
 
 === tell_me_about_yourself ===
 TODO 

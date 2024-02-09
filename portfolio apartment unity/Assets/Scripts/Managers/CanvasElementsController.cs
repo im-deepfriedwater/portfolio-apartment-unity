@@ -3,11 +3,12 @@ using System.Collections;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasElementsController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject choicePrefab;
+    private Button choicePrefab;
     private Animator animator;
 
     private DialogueManager dialogueManager;
@@ -19,6 +20,12 @@ public class CanvasElementsController : MonoBehaviour
     private Story currentStory;
 
     private IEnumerator textDisplayCoroutine;
+
+    [SerializeField]
+    private bool isFirstChoice = false;
+
+    [SerializeField]
+    private GameObject choiceContainer;
 
     [SerializeField]
     private TextMeshProUGUI body;
@@ -49,6 +56,7 @@ public class CanvasElementsController : MonoBehaviour
 
     [SerializeField]
     private Animator uiActorAnimator;
+
 
 
     // Start is called before the first frame update
@@ -105,8 +113,24 @@ public class CanvasElementsController : MonoBehaviour
 
     private void ShowChoices()
     {
+        // Based off of the example from Ink
+        foreach (Choice choice in currentStory.currentChoices)
+        {
+            Button choiceButton = Instantiate(choicePrefab, choiceContainer.transform);
+            Text buttonText = choiceButton.GetComponentInChildren<Text>();
 
+            buttonText.text = choice.text;
+            choiceButton.onClick.AddListener(delegate {
+                OnClickChoiceButton(choice);
+            });
+        }
     }
+
+    // When we click the choice button, tell the story to choose that choice!
+	void OnClickChoiceButton (Choice choice) {
+		currentStory.ChooseChoiceIndex(choice.index);
+		NextDialogue();
+	}
 
     public void NextDialogue()
     {
@@ -257,6 +281,7 @@ public class CanvasElementsController : MonoBehaviour
         dialogueManager.NextDialogue.Invoke();
     }
 
+    // Called by the Hide anim as an AnimationEvent when the anim finishes
     void OnHideAnimFinished()
     {
         dialogueManager.EndOfDialogueReached.Invoke();

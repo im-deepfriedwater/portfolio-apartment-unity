@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3257087355771630767}
   - component: {fileID: 3500169804462134640}
   - component: {fileID: 5655293141988895754}
+  - component: {fileID: 8875181886017168079}
   m_Layer: 5
   m_Name: DialogueChoice
   m_TagString: Untagged
@@ -90,6 +91,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8875181886017168079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3394743781701870276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b6d33891fb44fa587f0d7d28c7d433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7243758839194661308
 GameObject:
   m_ObjectHideFlags: 0
