@@ -8,6 +8,7 @@ public class DialogueInteractable : Interactable
 
     public override void Start()
     {
+        base.Start();
         dialogueManager = DialogueManager.Instance;
     }
 

@@ -103,6 +103,7 @@ public class CanvasElementsController : MonoBehaviour
 
         if (story.currentChoices.Count > 0)
         {
+            Debug.Log("choice time :ok:");
             ShowChoices();
         }
         else
@@ -144,14 +145,16 @@ public class CanvasElementsController : MonoBehaviour
 
         bool isSilent = false;
 
-        AudioClip speakerClip;
+        // narrator by default but will get
+        // overriden
+        AudioClip speakerClip = narratorClip;
 
         isDialogueDisplayFinished = false;
         hasTriedToSkip = false;
 
         goNextIndicator.SetActive(false);
-        left.HideIndicator();
-        right.HideIndicator();
+        left.HideExclaimEvent.Invoke();
+        right.HideExclaimEvent.Invoke();
 
         body.text = "";
         overflowChecker.text = "";
@@ -209,13 +212,18 @@ public class CanvasElementsController : MonoBehaviour
             }
         }
 
-        if (isLeftSpeaker)
+        if (isNarrator)
+        {
+            left.PlayAnimation("idle");
+            right.PlayAnimation("idle");
+        }
+        else if (isLeftSpeaker)
         {     
             if (!isNarrator && !isSilent) uiActorAnimator.Play("ShowLeft");
             if (!hasLeftAnim && !isNarrator) left.PlayAnimation("speaking");
             if (!hasLeftAnim && isNarrator) left.PlayAnimation("idle");
             if (!hasRightAnim) right.PlayAnimation("idle");
-            speakerClip = narratorClip;
+            speakerClip = left.DialogueBlip;
         }
         else if (isRightSpeaker)
         {
@@ -224,12 +232,7 @@ public class CanvasElementsController : MonoBehaviour
             if (!hasRightAnim) right.PlayAnimation("speaking");
             speakerClip = right.DialogueBlip;
         }
-        else
-        {
-            left.PlayAnimation("idle");
-            right.PlayAnimation("idle");
-            speakerClip = narratorClip;
-        }
+
 
         StartDisplayText(hasRantTag, currentStory.currentText, speakerClip);
     }

@@ -1,3 +1,5 @@
+-> END
+
 ... # rcr # anim_both_shocked # exclaim_left # hide_speaker # silent
 ... !! # jt # anim_both_shocked # hide_speaker # silent
 ...... # rcr # anim_both_shocked # hide_speaker # silent
@@ -5,15 +7,15 @@ Well, that was exciting! Anyways, a pleasure. I'm- # rcr # anim_left_shocked # h
 WAIT!!! WHAT?? You just came crashing through my window! # jt # anim_both_shocked # exclaim_right # hide_speaker
 Oh. Well, it wouldn't open from the outside.  # rcr # anim_left_shocked # hide_speaker
 I think this was the next logical action actually! # rcr # anim_left_shocked # hide_speaker
-............ # jt # anim_left_idle # hide_speaker # speaker
+....................... # jt # anim_left_idle # hide_speaker # speaker
 AS I was saying, I'm a recruiter with a nose for talent! # rcr # hide_speaker
-On my daily bagel run (there's a pretty good place near here) # rcr # hide_speaker
--my nose smelled a great deal of potential! # rcr # hide_speaker 
+On my daily bagel run- (there's a pretty good place near here) # rcr # hide_speaker
+\-my nose smelled a great deal of potential! # rcr # hide_speaker 
 
 So, tell me about yourself! # rcr # rant # hide_speaker
 
 The recruiter begins dusting off broken glass shards from- # narrator # anim_right_speaking # anim_left_shocked
--the freshly baked bagel stashed in their pocket. # narrator # anim_right_speaking
+\-the freshly baked bagel stashed in their pocket. # narrator # anim_right_speaking
 
 Erm, my name is Justin and I use he/him pronouns. # jt # exclaim_left
 
@@ -28,7 +30,7 @@ Hm, and I actually happen to be looking for work right now. # jt
 
 Perfect! How about we try this? # rcr
 
-I see some interesting projects laid out around here. # rcr 
+I see some interesting objects laid out around here. # rcr 
 I'll walk around using the mouse and left click. # rcr 
 Anything I'm curious about will light up and I can left click- # rcr
 -on it to prompt you to talk about them. # rcr
