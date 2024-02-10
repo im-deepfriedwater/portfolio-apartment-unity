@@ -100,37 +100,35 @@ public class CanvasElementsController : MonoBehaviour
         body.text = "";
         namePlate.text = "";
         currentStory = story;
+        
+        if (currentStory.canContinue) currentStory.Continue();
 
         if (story.currentChoices.Count > 0)
         {
-            Debug.Log("choice time :ok:");
-            ShowChoices();
+            // Based off of the example from Ink
+            foreach (Choice choice in currentStory.currentChoices)
+            {
+                Button choiceButton = Instantiate(choicePrefab, choiceContainer.transform);
+                Text buttonText = choiceButton.GetComponentInChildren<Text>();
+
+                buttonText.text = choice.text;
+                choiceButton.onClick.AddListener(delegate
+                {
+                    OnClickChoiceButton(choice);
+                });
+            }
+            animator.Play("ShowChoices");
         }
         else
         {
-            Show();
-        }
-    }
-
-    private void ShowChoices()
-    {
-        // Based off of the example from Ink
-        foreach (Choice choice in currentStory.currentChoices)
-        {
-            Button choiceButton = Instantiate(choicePrefab, choiceContainer.transform);
-            Text buttonText = choiceButton.GetComponentInChildren<Text>();
-
-            buttonText.text = choice.text;
-            choiceButton.onClick.AddListener(delegate {
-                OnClickChoiceButton(choice);
-            });
+            animator.Play("Show");
         }
     }
 
     // When we click the choice button, tell the story to choose that choice!
 	void OnClickChoiceButton (Choice choice) {
 		currentStory.ChooseChoiceIndex(choice.index);
-		NextDialogue();
+		DialogueManager.Instance.NextDialogue.Invoke();
 	}
 
     public void NextDialogue()
@@ -281,7 +279,7 @@ public class CanvasElementsController : MonoBehaviour
     // Called by the Show anim as an AnimationEvent when the anim finishes
     void OnShowAnimFinished()
     {
-        dialogueManager.NextDialogue.Invoke();
+        NextDialogue();
     }
 
     // Called by the Hide anim as an AnimationEvent when the anim finishes

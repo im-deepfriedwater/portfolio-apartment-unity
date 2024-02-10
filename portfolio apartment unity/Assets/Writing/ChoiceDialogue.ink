@@ -1,7 +1,3 @@
-
--> start
-
-=== start ===
 * [Tell me about yourself] -> tell_me_about_yourself
 * [Do you have a resume I can see?] -> resume
 * [What do you like to do for fun?] -> do_for_fun
