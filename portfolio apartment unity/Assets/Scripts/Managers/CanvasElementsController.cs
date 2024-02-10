@@ -70,6 +70,7 @@ public class CanvasElementsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isReadyForInput);
         if (!isReadyForInput) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -143,8 +144,8 @@ public class CanvasElementsController : MonoBehaviour
 
         bool isSilent = false;
 
-        // narrator by default but will get
-        // overriden
+        // narrator by default but can get
+        // overwritten
         AudioClip speakerClip = narratorClip;
 
         isDialogueDisplayFinished = false;
@@ -231,7 +232,6 @@ public class CanvasElementsController : MonoBehaviour
             speakerClip = right.DialogueBlip;
         }
 
-
         StartDisplayText(hasRantTag, currentStory.currentText, speakerClip);
     }
 
@@ -279,7 +279,7 @@ public class CanvasElementsController : MonoBehaviour
     // Called by the Show anim as an AnimationEvent when the anim finishes
     void OnShowAnimFinished()
     {
-        NextDialogue();
+       NextDialogue();
     }
 
     // Called by the Hide anim as an AnimationEvent when the anim finishes
@@ -290,6 +290,7 @@ public class CanvasElementsController : MonoBehaviour
 
     void StartDisplayText(bool hasRantTag, string msg, AudioClip speakerClip)
     {   
+        Debug.Log("Start Display Text");
         goNextIndicator.SetActive(false);
         hasTriedToSkip = false;
         textDisplayCoroutine = DisplayText(hasRantTag, msg, speakerClip);
@@ -297,7 +298,7 @@ public class CanvasElementsController : MonoBehaviour
     }
 
     IEnumerator DisplayText(bool isRant, string msg, AudioClip speakerClip)
-    {
+    {   
         int i = 0;
 
         foreach (char c in msg)
@@ -346,6 +347,7 @@ public class CanvasElementsController : MonoBehaviour
         isDialogueDisplayFinished = true;
         goNextIndicator.SetActive(true);
         isReadyForInput = true;
+        Debug.Log("but ull call rite");
     }
 
     void OnHandleInputInterrupt()
