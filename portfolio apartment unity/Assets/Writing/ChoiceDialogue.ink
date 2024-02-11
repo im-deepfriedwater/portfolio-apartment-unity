@@ -1,11 +1,9 @@
 * [Tell me about yourself] -> tell_me_about_yourself
-* [Do you have a resume I can see?] -> resume
-* [What do you like to do for fun?] -> do_for_fun
-* [So, tell me about your work experience] -> work_experience
-* [Why make all of this?] -> why_make_this
-* [What kind of work are you interested in?] -> what_kind_of_work
-* [How much will it cost to repair your window? # hide_on_first_show] -> repair_window
-* [Go back] -> DONE
+* [What do you do for fun?] -> do_for_fun
+* [Work experience] -> work_experience
+* [This portfolio] -> why_make_this
+* [What work interests you?] -> what_kind_of_work
+* [So... window repair... # hide_on_first_show] -> repair_window
 
 
 === tell_me_about_yourself ===
@@ -30,7 +28,11 @@ TODO
 
 
 === repair_window === 
-TODO
+So... how much will that window cost to fix? # rcr
+.... # jt # silent
+You're not going to pay to fix it are you? # jt # anim_right_shocked # exclaim_right
+................. # rcr # silent
+Great talk. Moving on then! # rcr # anim_left_shocked
 -> END
 
 === resume ===

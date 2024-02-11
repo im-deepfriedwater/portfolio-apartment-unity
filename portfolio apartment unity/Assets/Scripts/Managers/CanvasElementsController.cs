@@ -74,6 +74,7 @@ public class CanvasElementsController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("I lied i was ready for input :ok:");
             OnHandleInputInterrupt();
         }
     }
@@ -100,23 +101,13 @@ public class CanvasElementsController : MonoBehaviour
         body.text = "";
         namePlate.text = "";
         currentStory = story;
-        
+
         if (currentStory.canContinue) currentStory.Continue();
 
         if (story.currentChoices.Count > 0)
         {
-            // Based off of the example from Ink
-            foreach (Choice choice in currentStory.currentChoices)
-            {
-                Button choiceButton = Instantiate(choicePrefab, choiceContainer.transform);
-                TextMeshProUGUI buttonText = choiceButton.GetComponentInChildren<TextMeshProUGUI>();
-
-                buttonText.text = choice.text;
-                choiceButton.onClick.AddListener(delegate
-                {
-                    OnClickChoiceButton(choice);
-                });
-            }
+            Debug.Log("Init dialogue?????????/");
+            CreateChoiceView();
             animator.Play("ShowChoices");
         }
         else
@@ -126,12 +117,30 @@ public class CanvasElementsController : MonoBehaviour
     }
 
     // When we click the choice button, tell the story to choose that choice!
-	void OnClickChoiceButton (Choice choice) {
-		currentStory.ChooseChoiceIndex(choice.index);
-		DialogueManager.Instance.NextDialogue.Invoke();
-	}
+    void OnClickChoiceButton(Choice choice)
+    {
+        currentStory.ChooseChoiceIndex(choice.index);
+        DialogueManager.Instance.NextDialogue.Invoke();
+    }
 
-    public void NextDialogue()
+    private void CreateChoiceView()
+    {
+        // Based off of the example from Ink
+        foreach (Choice choice in currentStory.currentChoices)
+        {
+            Button choiceButton = Instantiate(choicePrefab, choiceContainer.transform);
+            TextMeshProUGUI buttonText = choiceButton.GetComponentInChildren<TextMeshProUGUI>();
+
+            buttonText.text = choice.text;
+            choiceButton.onClick.AddListener(delegate
+            {
+                Debug.Log("get chosen");
+                OnClickChoiceButton(choice);
+            });
+        }
+    }
+
+    private void CreateDialogueView()
     {
         bool hasRantTag = false;
         bool hasLeftAnim = false;
@@ -182,7 +191,7 @@ public class CanvasElementsController : MonoBehaviour
             {
                 isSilent = true;
             }
-                            
+
             if (tag.Contains("hide_speaker"))
             {
                 HideName();
@@ -203,7 +212,8 @@ public class CanvasElementsController : MonoBehaviour
             else if (tag.Contains("rant"))
             {
                 hasRantTag = true;
-            } else if (tag.Contains("exclaim"))
+            }
+            else if (tag.Contains("exclaim"))
             {
                 if (tag.Contains("left")) left.ShowExclaimEvent.Invoke();
                 if (tag.Contains("right")) right.ShowExclaimEvent.Invoke();
@@ -216,7 +226,7 @@ public class CanvasElementsController : MonoBehaviour
             right.PlayAnimation("idle");
         }
         else if (isLeftSpeaker)
-        {     
+        {
             if (!isNarrator && !isSilent) uiActorAnimator.Play("ShowLeft");
             if (!hasLeftAnim && !isNarrator) left.PlayAnimation("speaking");
             if (!hasLeftAnim && isNarrator) left.PlayAnimation("idle");
@@ -236,6 +246,7 @@ public class CanvasElementsController : MonoBehaviour
 
     public void EndDialogue()
     {
+        isReadyForInput = false;
         Hide();
     }
 
@@ -265,6 +276,21 @@ public class CanvasElementsController : MonoBehaviour
         }
     }
 
+    public void NextDialogue()
+    {
+        isReadyForInput = false;
+
+        if (currentStory.currentChoices.Count > 0)
+        {
+            Debug.Log("Next dialouge??????/");
+            CreateChoiceView();
+        }
+        else
+        {
+            CreateDialogueView();
+        }
+    }
+
     private void Hide()
     {
         animator.Play("Hide");
@@ -273,7 +299,7 @@ public class CanvasElementsController : MonoBehaviour
     // Called by the Show anim as an AnimationEvent when the anim finishes
     void OnShowAnimFinished()
     {
-       NextDialogue();
+        NextDialogue();
     }
 
     // Called by the Hide anim as an AnimationEvent when the anim finishes
@@ -283,7 +309,7 @@ public class CanvasElementsController : MonoBehaviour
     }
 
     void StartDisplayText(bool hasRantTag, string msg, AudioClip speakerClip)
-    {   
+    {
         goNextIndicator.SetActive(false);
         hasTriedToSkip = false;
         textDisplayCoroutine = DisplayText(hasRantTag, msg, speakerClip);
@@ -291,11 +317,11 @@ public class CanvasElementsController : MonoBehaviour
     }
 
     IEnumerator DisplayText(bool isRant, string msg, AudioClip speakerClip)
-    {   
+    {
         int i = 0;
 
         foreach (char c in msg)
-        {   
+        {
             if (!isRant && hasTriedToSkip)
             {
                 FinishText(msg);
@@ -314,8 +340,8 @@ public class CanvasElementsController : MonoBehaviour
             if (!isRant)
             {
                 yield return new WaitForSeconds(0.08f);
-            } 
-            else 
+            }
+            else
             {
                 yield return new WaitForSeconds(0.07f);
             }

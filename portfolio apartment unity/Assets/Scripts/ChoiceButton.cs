@@ -1,18 +1,23 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class ChoiceButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
-    private Text displayText;
+    private TextMeshProUGUI displayText;
 
     private string originalMsg;
+
+    public void GigaTest()
+    {
+        Debug.Log("moinkaS");
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        displayText = GetComponentInChildren<Text>();
+        displayText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
