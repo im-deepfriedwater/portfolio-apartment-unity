@@ -70,7 +70,6 @@ public class CanvasElementsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isReadyForInput);
         if (!isReadyForInput) return;
 
         if (Input.GetMouseButtonDown(0))
@@ -110,7 +109,7 @@ public class CanvasElementsController : MonoBehaviour
             foreach (Choice choice in currentStory.currentChoices)
             {
                 Button choiceButton = Instantiate(choicePrefab, choiceContainer.transform);
-                Text buttonText = choiceButton.GetComponentInChildren<Text>();
+                TextMeshProUGUI buttonText = choiceButton.GetComponentInChildren<TextMeshProUGUI>();
 
                 buttonText.text = choice.text;
                 choiceButton.onClick.AddListener(delegate
@@ -271,11 +270,6 @@ public class CanvasElementsController : MonoBehaviour
         animator.Play("Hide");
     }
 
-    private void Show()
-    {
-        animator.Play("Show");
-    }
-
     // Called by the Show anim as an AnimationEvent when the anim finishes
     void OnShowAnimFinished()
     {
@@ -290,7 +284,6 @@ public class CanvasElementsController : MonoBehaviour
 
     void StartDisplayText(bool hasRantTag, string msg, AudioClip speakerClip)
     {   
-        Debug.Log("Start Display Text");
         goNextIndicator.SetActive(false);
         hasTriedToSkip = false;
         textDisplayCoroutine = DisplayText(hasRantTag, msg, speakerClip);
@@ -347,7 +340,6 @@ public class CanvasElementsController : MonoBehaviour
         isDialogueDisplayFinished = true;
         goNextIndicator.SetActive(true);
         isReadyForInput = true;
-        Debug.Log("but ull call rite");
     }
 
     void OnHandleInputInterrupt()

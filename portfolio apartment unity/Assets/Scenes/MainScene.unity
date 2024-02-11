@@ -2457,7 +2457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   choicePrefab: {fileID: 5655293141988895754, guid: 2d33c6c5ac0de4cfaa6885795e7ea820, type: 3}
   isFirstChoice: 0
-  choiceContainer: {fileID: 0}
+  choiceContainer: {fileID: 1246207387}
   body: {fileID: 4849596}
   overflowChecker: {fileID: 1391189765}
   namePlate: {fileID: 1088918091}
@@ -6898,7 +6898,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246207387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11546,7 +11546,7 @@ Transform:
   m_GameObject: {fileID: 2556390607975393393}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00064975006, y: -0.019504528, z: 0.9998076, w: -0.0019907947}
-  m_LocalPosition: {x: 0.0000021597957, y: 0.003922848, z: -0.00074968603}
+  m_LocalPosition: {x: 0.00000215917, y: 0.003922846, z: -0.0007496854}
   m_LocalScale: {x: 1.000004, y: 1, z: 0.9999999}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13797,7 +13797,7 @@ Transform:
   m_GameObject: {fileID: 7123887824123179799}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0009546651, y: 0.7071062, z: -0.70710593, w: -0.0010861977}
-  m_LocalPosition: {x: 0.000009877428, y: -0.00057904935, z: 0.012381176}
+  m_LocalPosition: {x: 0.0000098770115, y: -0.00057904853, z: 0.012381176}
   m_LocalScale: {x: 1, y: 1.0000002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
