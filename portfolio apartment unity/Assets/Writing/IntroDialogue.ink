@@ -3,7 +3,6 @@
 ... # rcr # anim_both_shocked # exclaim_left # hide_speaker # silent
 ... !! # jt # anim_both_shocked # hide_speaker # silent
 ...... # rcr # anim_both_shocked # hide_speaker # silent
-Well, that was exciting! Anyways, a pleasure. I'm- # rcr # anim_left_shocked # hide_speaker
 WAIT!!! WHAT?? You just came crashing through my window! # jt # anim_both_shocked # exclaim_right # hide_speaker
 Oh. Well, it wouldn't open from the outside.  # rcr # anim_left_shocked # hide_speaker
 I think this was the next logical action actually! # rcr # anim_left_shocked # hide_speaker
@@ -30,16 +29,13 @@ Hm, and I actually happen to be looking for work right now. # jt
 
 Perfect! How about we try this? # rcr
 
-I see some interesting objects laid out around here. # rcr 
-I'll walk around using the mouse and left click. # rcr 
-Anything I'm curious about will light up and I can left click- # rcr
--on it to prompt you to talk about them. # rcr
-If I want to ask about yourself I'll left click on you. # rcr
-Then, we can have a good ol' fashioned dialogue about it. # rcr
-
+I have some questions to find out what makes you tick # rcr
+If I want to ask them, I can left click on you. # rcr
+Then, we'll have a good ol' fashioned dialogue about it. # rcr
+If any of your projects laid out here catch my eye- # rcr
+\they'll light up and I can left click to ask you about them. # rcr
+Sound good? # rcr
 Oddly specific but sounds professional. Let's do it! # jt
-
-
 -> END
 
 
