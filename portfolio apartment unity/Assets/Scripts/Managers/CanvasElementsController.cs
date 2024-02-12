@@ -57,8 +57,6 @@ public class CanvasElementsController : MonoBehaviour
     [SerializeField]
     private Animator uiActorAnimator;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -74,7 +72,6 @@ public class CanvasElementsController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("I lied i was ready for input :ok:");
             OnHandleInputInterrupt();
         }
     }
@@ -106,7 +103,6 @@ public class CanvasElementsController : MonoBehaviour
 
         if (story.currentChoices.Count > 0)
         {
-            Debug.Log("Init dialogue?????????/");
             CreateChoiceView();
             animator.Play("ShowChoices");
         }
@@ -120,7 +116,15 @@ public class CanvasElementsController : MonoBehaviour
     void OnClickChoiceButton(Choice choice)
     {
         currentStory.ChooseChoiceIndex(choice.index);
-        DialogueManager.Instance.NextDialogue.Invoke();
+
+        int childCount = choiceContainer.transform.childCount;
+        // from the inkle example
+        for (int i = childCount - 1; i >= 0; --i)
+        {
+            Destroy(choiceContainer.transform.GetChild(i).gameObject);
+        }
+
+        animator.Play("ChoicesToDialogue");
     }
 
     private void CreateChoiceView()
@@ -134,10 +138,14 @@ public class CanvasElementsController : MonoBehaviour
             buttonText.text = choice.text;
             choiceButton.onClick.AddListener(delegate
             {
-                Debug.Log("get chosen");
                 OnClickChoiceButton(choice);
             });
         }
+    }
+
+    private void AnimOnChoicesToDialogueEnd()
+    {
+        DialogueManager.Instance.NextDialogue.Invoke();
     }
 
     private void CreateDialogueView()
@@ -227,17 +235,28 @@ public class CanvasElementsController : MonoBehaviour
         }
         else if (isLeftSpeaker)
         {
-            if (!isNarrator && !isSilent) uiActorAnimator.Play("ShowLeft");
-            if (!hasLeftAnim && !isNarrator) left.PlayAnimation("speaking");
-            if (!hasLeftAnim && isNarrator) left.PlayAnimation("idle");
+            if (!isSilent) 
+            {
+                if (!hasLeftAnim) left.PlayAnimation("speaking");
+                uiActorAnimator.Play("ShowLeft");
+            }
+            
             if (!hasRightAnim) right.PlayAnimation("idle");
+            if (!hasLeftAnim || isSilent) left.PlayAnimation("idle");
+
             speakerClip = left.DialogueBlip;
         }
         else if (isRightSpeaker)
         {
-            if (!isSilent) uiActorAnimator.Play("ShowRight");
+            if (!isSilent) 
+            {
+                if (!hasRightAnim) right.PlayAnimation("speaking");
+                uiActorAnimator.Play("ShowRight");
+            }
+            
             if (!hasLeftAnim) left.PlayAnimation("idle");
-            if (!hasRightAnim) right.PlayAnimation("speaking");
+            if (!hasRightAnim || isSilent) right.PlayAnimation("idle");
+
             speakerClip = right.DialogueBlip;
         }
 
@@ -282,7 +301,6 @@ public class CanvasElementsController : MonoBehaviour
 
         if (currentStory.currentChoices.Count > 0)
         {
-            Debug.Log("Next dialouge??????/");
             CreateChoiceView();
         }
         else
