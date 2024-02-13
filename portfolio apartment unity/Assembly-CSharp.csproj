@@ -64,7 +64,6 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.16f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/Managers/MovementManager.cs" />
     <Compile Include="Assets/Ink/Demos/Basic Demo/Scripts/BasicInkExample.cs" />
     <Compile Include="Assets/Scripts/GroundNavMesh.cs" />
     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventHandler.cs" />
