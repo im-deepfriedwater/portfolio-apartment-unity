@@ -14,6 +14,7 @@ public class DialogueInteractable : Interactable
 
     void OnMouseDown()
     {
+        if (!IsInputActive) return;
         dialogueManager.StartDialogue.Invoke(story);
     }
 }

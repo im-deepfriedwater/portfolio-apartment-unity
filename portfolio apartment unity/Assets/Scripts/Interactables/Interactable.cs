@@ -7,7 +7,7 @@ public abstract class Interactable : MonoBehaviour
 {   
     [SerializeField]
     private Outline[] childrenOutlines;
-    private bool isInputActive = false; 
+    protected bool IsInputActive = false; 
     protected Outline Outline;
 
     // Start is called before the first frame update
@@ -15,8 +15,8 @@ public abstract class Interactable : MonoBehaviour
     {
       Outline = GetComponent<Outline>();
       Outline.eraseRenderer = true;
-      DialogueManager.Instance.StartDialogue.AddListener((TextAsset _) => isInputActive = false);
-      DialogueManager.Instance.EndOfDialogueReached.AddListener(() => isInputActive = true);
+      DialogueManager.Instance.StartDialogue.AddListener((TextAsset _) => IsInputActive = false);
+      DialogueManager.Instance.EndOfDialogueReached.AddListener(() => IsInputActive = true);
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public abstract class Interactable : MonoBehaviour
 
     public virtual void OnMouseEnter()
     {
-      if (!isInputActive) return;
+      if (!IsInputActive) return;
       Outline.eraseRenderer = false;
 
       foreach (var childOutline in childrenOutlines)

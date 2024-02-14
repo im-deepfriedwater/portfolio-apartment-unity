@@ -8,18 +8,15 @@
 === tell_me_about_yourself ===
 Why don't you tell me about yourself? # rcr
 Sure. # jt
-Well, I'm a curious and user-oriented developer! # jt
-To me, the exciting work I've enjoyed is-# jt
-\- multi-discplinary collaboration. # jt
-I strongly value the creative energy of people excitedly- # jt
-\- bouncing off of each other's ideas. # jt
-There are many talented people out there with- #jt
-\- valuable perspectives that I don't have. # jt
-After Iterating, tweaking, iterating some more- # jt 
-\- I've found you can create some really awesome stuff. # jt
-Right. # rcr
-One could argue that I gave you some new perspective. # rcr
-You did? # jt
+I'd say I value curiousity and being user-oriented in anything I work on.# jt
+The work I've most enjoyed involved working with people across disciplines. # jt
+The creative energy of bouncing off of different peoples' ideas is special. # jt
+People are talented and have different perspectives that I lack. # jt
+Through collaboration, being open to feedback, and iterating- # jt
+\-it often results in building something special with the help of others. # jt
+Right! # rcr
+Actually, one could argue that you gained some new perspective with my help. # rcr
+They could? # jt
 Now with that pesky window out of the way you can now hear- # rcr # exclaim_right
 and smell the beautiful world hidden behind that window tint! # rcr
 That's great... I'll be sure to enjoy the smells and sounds. # jt
@@ -40,7 +37,7 @@ What do you like to do for fun, Recruiter? # jt
 The Recruiter goes on a passionate tirade about her hobbies. # narrator 
 Including the time she: volunteered and served 1000 bagels to the needy. # narrator
 When she narrowly won her local municipal's pickleball tournament. # narrator
-When she bravely lent her Ferrari to the president of the U.S. # narrator
+When she bravely lent her Ferrari to the president of the United States. # narrator
 Although, you suspect that last one is likely a fib. # narrator
 -> END
 

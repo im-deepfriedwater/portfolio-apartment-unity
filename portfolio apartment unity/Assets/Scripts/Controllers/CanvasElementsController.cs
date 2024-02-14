@@ -9,17 +9,6 @@ public class CanvasElementsController : MonoBehaviour
 {
     [SerializeField]
     private Button choicePrefab;
-    private Animator animator;
-
-    private DialogueManager dialogueManager;
-    private SoundManager soundManager;
-    private bool isReadyForInput = false;
-    private bool hasTriedToSkip = false;
-    private bool isDialogueDisplayFinished = false;
-
-    private Story currentStory;
-
-    private IEnumerator textDisplayCoroutine;
 
     [SerializeField]
     private bool isFirstChoice = false;
@@ -56,6 +45,19 @@ public class CanvasElementsController : MonoBehaviour
 
     [SerializeField]
     private Animator uiActorAnimator;
+
+    private Animator animator;
+
+    private DialogueManager dialogueManager;
+    private SoundManager soundManager;
+    private bool isReadyForInput = false;
+    private bool hasTriedToSkip = false;
+    private bool isDialogueDisplayFinished = false;
+
+    private Story currentStory;
+
+    private IEnumerator textDisplayCoroutine;
+    private string currentLink = "";
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +100,7 @@ public class CanvasElementsController : MonoBehaviour
         body.text = "";
         namePlate.text = "";
         currentStory = story;
+        currentLink = "";
 
         if (currentStory.canContinue) currentStory.Continue();
 
@@ -144,7 +147,12 @@ public class CanvasElementsController : MonoBehaviour
     }
 
     private void AnimOnChoicesToDialogueEnd()
-    {
+    {   
+        // from the inkle example
+        int childCount = choiceContainer.transform.childCount;
+		for (int i = childCount - 1; i >= 0; --i) {
+			Destroy(choiceContainer.transform.GetChild(i).gameObject);
+		}
         DialogueManager.Instance.NextDialogue.Invoke();
     }
 
@@ -166,6 +174,7 @@ public class CanvasElementsController : MonoBehaviour
 
         isDialogueDisplayFinished = false;
         hasTriedToSkip = false;
+        isReadyForInput = true;
 
         goNextIndicator.SetActive(false);
         left.HideExclaimEvent.Invoke();
@@ -174,6 +183,7 @@ public class CanvasElementsController : MonoBehaviour
         body.text = "";
         overflowChecker.text = "";
         namePlate.text = "";
+        
 
         foreach (string currentTag in currentStory.currentTags)
         {
@@ -225,6 +235,9 @@ public class CanvasElementsController : MonoBehaviour
             {
                 if (tag.Contains("left")) left.ShowExclaimEvent.Invoke();
                 if (tag.Contains("right")) right.ShowExclaimEvent.Invoke();
+            } else if (tag.Contains("link"))
+            {
+                currentLink = tag.Split("_")[1];
             }
         }
 
@@ -291,7 +304,7 @@ public class CanvasElementsController : MonoBehaviour
                 break;
 
             default:
-                throw new Exception($"CanvasElementController: Bad param for animation target passed {animationTarget}");
+                throw new Exception($"CanvasElementController: Bad param for animation target passed {animationTarget} tag: {tag}");
         }
     }
 
@@ -384,6 +397,12 @@ public class CanvasElementsController : MonoBehaviour
         isDialogueDisplayFinished = true;
         goNextIndicator.SetActive(true);
         isReadyForInput = true;
+
+        if (!string.IsNullOrEmpty(currentLink))
+        {
+            Application.OpenURL(currentLink);
+            currentLink = "";
+        }
     }
 
     void OnHandleInputInterrupt()
