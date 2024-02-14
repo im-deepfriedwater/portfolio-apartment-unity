@@ -9,11 +9,6 @@ public class ChoiceButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private string originalMsg;
 
-    public void GigaTest()
-    {
-        Debug.Log("moinkaS");
-    }
-
     // Start is called before the first frame update
     void Start()
     {
