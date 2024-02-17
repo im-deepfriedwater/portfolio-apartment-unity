@@ -1,5 +1,3 @@
--> END
-
 ... # rcr # anim_both_shocked # exclaim_left # hide_speaker # silent
 ... !! # jt # anim_both_shocked # hide_speaker # silent
 ...... # rcr # anim_both_shocked # hide_speaker # silent
