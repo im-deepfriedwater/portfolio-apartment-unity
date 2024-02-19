@@ -242,6 +242,7 @@ MonoBehaviour:
   - 'on one faithful day your sharpened  recruiter instincts sense one such candidate.
     Cartoonishly, you launch yourself through the glass window of their 3rd story
     apartment. '
+  - (There will be a glass shatter noise, adjust your volume accordingly before continuing!)
   introDialogueController: {fileID: 810028292}
   IntroDialogueControllerReady:
     m_PersistentCalls:
